@@ -12,8 +12,9 @@ program
   .option("-s, --source", "specify a different source directory")
   .parse(process.argv);
 
-config.appdir = program.source || config.appdir;
-config.pubdir = program.target || config.pubdir;
+config.appdir  =   program.source || config.appdir;
+config.pubdir  =   program.target || config.pubdir;
+config.devmode = !(program.build  || false);
 
 var preamble = function() {
   log();
@@ -35,8 +36,4 @@ var build = function() {
   core.regen_all();
 };
 
-if(program.build) {
-  build();
-} else {
-  devmode();
-}
+config.devmode ? devmode() : build();
