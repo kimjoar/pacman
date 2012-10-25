@@ -1,3 +1,5 @@
 public/
-example/files
+_public/
+
+example/files/
 node_modules/
