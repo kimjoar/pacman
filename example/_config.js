@@ -16,6 +16,14 @@ exports.config = {
       ]
     }
 
+  },
+
+  helpers: {
+
+    hello: function() {
+      return "hello!";
+    }
+
   }
 
 };
