@@ -35,14 +35,14 @@ var preamble = function() {
 var devmode = function() {
   log(1, "Development mode!");
   preamble();
-  core.regen_all();
+  core.regenAll();
   core.watch();
 };
 
 var buildmode = function() {
   log(1, "Building site!");
   preamble();
-  core.regen_all();
+  core.regenAll();
 };
 
 if(config.server) server.start(config);
