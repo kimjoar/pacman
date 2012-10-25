@@ -2,14 +2,19 @@
 
 var program  = require("commander");
 
+program.listsplit = function(val) {
+  return val.split(',');
+};
+
 program
   .version("0.0.0")
   .option("-d, --dev",              "development mode: auto-generate changed files")
   .option("-b, --build",            "build mode: build a complete version, with packed assets")
   .option("-s, --server",           "serve content from the target directory on localhost")
-  .option("-t, --target [value]",   "specify a different target directory (default ../public)")
-  .option("-f, --from [value]",     "specify a different source directory (default current dir)")
-  .option("-p, --port [value]",     "specify a different server port (default 3000)")
+  .option("-t, --target  <value>",  "specify a different target directory (default ../public)")
+  .option("-f, --from    <value>",  "specify a different source directory (default current dir)")
+  .option("-p, --port    <value>",  "specify a different server port (default 3000)")
+  .option("-i, --ignore  <value>",  "ignore files with value in path (csv)", program.listsplit)
   .parse(process.argv);
 
 if(!program.server && !program.dev && !program.build) {
@@ -22,7 +27,7 @@ var config   = require("../lib/config").config;
     server   = require("../lib/server").server;
 
 config.override(program, [
-  "source", "target", "port", "dev", "build", "server"
+  "source", "target", "port", "dev", "build", "server", "ignore"
 ]);
 
 var preamble = function() {
