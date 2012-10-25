@@ -1,32 +1,27 @@
 #!/usr/bin/env node
 
-var program  = require("commander");
-
-program.listsplit = function(val) {
-  return val.split(',');
-};
+var program  = require("commander"),
+    config   = require("../lib/config").config;
+    core     = require("../lib/core").core,
+    log      = require("../lib/log").log;
+    server   = require("../lib/server").server;
 
 program
-  .version("0.0.0")
+  .version(config.version)
   .option("-d, --dev",              "development mode: auto-generate changed files")
   .option("-b, --build",            "build mode: build a complete version, with packed assets")
   .option("-s, --server",           "serve content from the target directory on localhost")
   .option("-t, --target  <value>",  "specify a different target directory (default ../public)")
   .option("-f, --from    <value>",  "specify a different source directory (default current dir)")
   .option("-p, --port    <value>",  "specify a different server port (default 3000)")
-  .option("-i, --ignore  <value>",  "ignore files with value in path (csv)", program.listsplit)
+  .option("-i, --ignore  <value>",  "ignore files with value in path (csv)", config.split)
   .parse(process.argv);
 
 if(!program.server && !program.dev && !program.build) {
   program.help();
 }
 
-var config   = require("../lib/config").config;
-    core     = require("../lib/core").core,
-    log      = require("../lib/log").log;
-    server   = require("../lib/server").server;
-
-config.override(program, [
+config.load().override(program, [
   "source", "target", "port", "dev", "build", "server", "ignore"
 ]);
 
