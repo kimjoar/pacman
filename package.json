@@ -22,7 +22,8 @@
     "async": "",
     "date-utils": "",
     "uglify-js2": "",
-    "clean-css": ""
+    "clean-css": "",
+    "connect": ""
   },
   "devDependencies": {},
   "optionalDependencies": {}
