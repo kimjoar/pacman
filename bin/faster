@@ -1,152 +1,40 @@
 #!/usr/bin/env node
 
-var fs       = require('fs'),
-    util     = require('util'),
-    child    = require('child_process'),
-    path     = require('path');
-
-var watch    = require('watch'),
-    async    = require('async'),
-    wrench   = require('wrench'),
-    colors   = require('colors'),
-    date     = require('date-utils'),
-    program  = require('commander'),
-    _        = require('underscore')._;
-
-var faster = {
-  version: "0.0.0",
-  log:     require("../lib/log").log,
-  files:   require("../lib/files")
-};
-
-/* ------------------------------------------ */
+var program  = require("commander"),
+    config   = require("../lib/config").config;
+    core     = require("../lib/core").core;
 
 program
-  .version(faster.version)
-  .usage('[options] <file ...>')
-  .option('-b, --build', 'build a deployable version')
+  .version(core.version)
+  .option("-b, --build",  "build a deployable version")
+  .option("-t, --target", "specify a different target directory")
+  .option("-s, --source", "specify a different source directory")
   .parse(process.argv);
 
-faster.pubname = "public";
-faster.appdir  = process.cwd();
-faster.pubdir  = path.join(faster.appdir, "..", faster.pubname);
-
-/* ------------------------------------------ */
-
-faster.isHelperFile = function(f) {
-  return f[0] === "_";
+var preamble = function() {
+  core.log();
+  core.log(1, "Faster!");
+  core.log(2, "Source:", program.source || config.appdir);
+  core.log(2, "Target:", program.target || config.pubdir);
+  core.log();
 };
 
-faster.target = function(f) {
-  return path.join(faster.pubdir, f.replace(faster.appdir, ""));
+var devmode = function() {
+  preamble();
+  core.log(1, "Development mode!");
+  core.regen_all();
+  core.watch();
 };
 
-faster.isProcessableFile = function(f) {
-  return !faster.isHelperFile(f) && !fs.lstatSync(f).isDirectory();
+var build = function() {
+  preamble();
+  core.log(1, "Building site!");
+  core.log();
+  core.regen_all();
 };
-
-/* ------------------------------------------ */
-
-faster.resetPublicDir = function() {
-  try { fs.rmdirSync(faster.pubdir); } catch(e) {}; 
-  try { fs.mkdirSync(faster.pubdir); } catch(e) {}; 
-};
-
-faster.processAndWriteFile = function(f, callback) {
-  var data = "";
-  if(faster.isProcessableFile(f)) {
-    data = faster.processFile(f);
-    faster.files.writeFile(faster.target(f), data);
-  }
-  if(_.isFunction(callback)) {
-    callback();
-  }
-  return data;
-};
-
-faster.processFile = function(f) {
-  return faster.processContent(f, faster.files.readFile(f));    
-};
-
-faster.processContent = function(f, data) {
-  var fn = faster.filter[faster.files.filetype(f)];
-  return _.isFunction(fn) ? fn(data) : data;
-};
-
-/* ------------------------------------------ */
-
-faster.filter = {};
-
-faster.filter.html = function(data) {
-  return _.template(data)(faster.filter.helpers);
-};
-
-faster.filter.helpers = {
-  render: function(f) { 
-    return faster.processFile(path.join(faster.appdir, f));
-  }
-};
-
-/* ------------------------------------------ */
-
-faster.regen_all = function() {
-  faster.resetPublicDir();
-  var queue = async.queue(faster.processAndWriteFile, 200);
-  faster.files.all(faster.appdir, queue.push);
-};
-
-faster.regen_type = function(type) {
-  var queue = async.queue(faster.processAndWriteFile, 200);
-  faster.files.all(faster.appdir, function(files) {
-    queue.push(_.filter(wrench.readdirSyncRecursive(faster.appdir), function(f) {
-      return faster.isProcessableFile(f) && faster.files.filetype(f) === type;
-    }));
-  });
-}; 
-
-faster.watch = function() {
-  faster.log(2, "Watching directory", faster.appdir);
-  faster.log();
-  var change = function(f) {
-    if(!faster.isProcessableFile(f)) return;
-    faster.log(3, "Changed", f);
-    faster.regen_type(faster.files.filetype(f), f);
-  };
-  watch.createMonitor(faster.appdir, function (monitor) {
-    monitor.on("created", change);
-    monitor.on("changed", change);
-    monitor.on("removed", change);
-  });
-};
-
-/* ------------------------------------------ */
-
-faster.preamble = function() {
-  faster.log();
-  faster.log(1, "Faster!");
-  faster.log(2, "Source:", faster.appdir);
-  faster.log(2, "Target:", faster.pubdir);
-  faster.log();
-};
-
-faster.devmode = function() {
-  faster.preamble();
-  faster.log(1, "Development mode!");
-  faster.regen_all();
-  faster.watch();
-};
-
-faster.build = function() {
-  faster.preamble();
-  faster.log(1, "Building site!");
-  faster.log();
-  faster.regen_all();
-};
-
-/* ------------------------------------------ */
 
 if(program.build) {
-  faster.build();
+  build();
 } else {
-  faster.devmode();
+  devmode();
 }
