@@ -36,4 +36,4 @@ var build = function() {
   core.regen_all();
 };
 
-config.devmode ? devmode() : build();
+(config.restart = config.devmode ? devmode : build)();
