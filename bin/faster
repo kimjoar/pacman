@@ -11,11 +11,14 @@ program
   .option("-s, --source", "specify a different source directory")
   .parse(process.argv);
 
+config.appdir = program.source || config.appdir;
+config.pubdir = program.target || config.pubdir;
+
 var preamble = function() {
   core.log();
   core.log(1, "Faster!");
-  core.log(2, "Source:", program.source || config.appdir);
-  core.log(2, "Target:", program.target || config.pubdir);
+  core.log(2, "Source:", config.appdir);
+  core.log(2, "Target:", config.pubdir);
   core.log();
 };
 
