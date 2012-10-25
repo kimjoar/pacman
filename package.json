@@ -1,0 +1,26 @@
+{
+  "author": "ol4v",
+  "name": "faster",
+  "description": "A fast static site generator.",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "engines": {
+    "node": "~0.6.9"
+  }, 
+  "bin": {
+    "faster": "bin/faster"
+  },
+  "dependencies": {
+    "underscore": "",
+    "commander": "",
+    "colors": "",
+    "wrench": "",
+    "watch": "",
+    "async": "",
+    "date-utils": ""
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
