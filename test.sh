@@ -2,14 +2,15 @@
 
 rm -rf example/public
 rm -rf example/files
-mkdir -p example/files
+mkdir -p example/files/txt
+mkdir -p example/files/html
 
-for i in {1..100}; do
+for i in {1..5000}; do
     echo $i
-    echo "$i" > "example/files/$(echo $i).txt"
+    echo "$i" > "example/files/txt/$(echo $i).txt"
 done
 
-for i in {1..100}; do
+for i in {1..5000}; do
     echo $i
-    echo "$i" > "example/files/$(echo $i).html"
+    echo "$i" > "example/files/html/$(echo $i).html"
 done

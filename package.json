@@ -19,7 +19,8 @@
     "wrench": "",
     "watch": "",
     "async": "",
-    "date-utils": ""
+    "date-utils": "",
+    "yaml": ""
   },
   "devDependencies": {},
   "optionalDependencies": {}

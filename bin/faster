@@ -2,7 +2,8 @@
 
 var program  = require("commander"),
     config   = require("../lib/config").config;
-    core     = require("../lib/core").core;
+    core     = require("../lib/core").core,
+    log      = require("../lib/log").log;
 
 program
   .version(core.version)
@@ -15,24 +16,22 @@ config.appdir = program.source || config.appdir;
 config.pubdir = program.target || config.pubdir;
 
 var preamble = function() {
-  core.log();
-  core.log(1, "Faster!");
-  core.log(2, "Source:", config.appdir);
-  core.log(2, "Target:", config.pubdir);
-  core.log();
+  log();
+  log(2, "Source:", config.appdir);
+  log(2, "Target:", config.pubdir);
+  log();
 };
 
 var devmode = function() {
   preamble();
-  core.log(1, "Development mode!");
+  log(1, "Development mode!");
   core.regen_all();
   core.watch();
 };
 
 var build = function() {
   preamble();
-  core.log(1, "Building site!");
-  core.log();
+  log(1, "Building site!");
   core.regen_all();
 };
 
