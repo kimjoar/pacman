@@ -4,12 +4,12 @@ var program  = require("commander");
 
 program
   .version("0.0.0")
-  .option("-d, --dev",    "development mode: auto-generate changed files")
-  .option("-b, --build",  "build mode: build a complete version, with packed assets")
-  .option("-t, --target", "specify a different target directory (default ../public)")
-  .option("-f, --from",   "specify a different source directory (default current dir)")
-  .option("-s, --server", "serve content from the target directory on localhost")
-  .option("-p, --port",   "specify a different server port (default 3000)")
+  .option("-d, --dev",              "development mode: auto-generate changed files")
+  .option("-b, --build",            "build mode: build a complete version, with packed assets")
+  .option("-s, --server",           "serve content from the target directory on localhost")
+  .option("-t, --target [value]",   "specify a different target directory (default ../public)")
+  .option("-f, --from [value]",     "specify a different source directory (default current dir)")
+  .option("-p, --port [value]",     "specify a different server port (default 3000)")
   .parse(process.argv);
 
 if(!program.server && !program.dev && !program.build) {
@@ -27,21 +27,21 @@ config.override(program, [
 
 var preamble = function() {
   log();
-  log(2, "Source:", config.appdir);
-  log(2, "Target:", config.pubdir);
+  log(3, "Source:", config.appdir);
+  log(3, "Target:", config.pubdir);
   log();
 };
 
 var devmode = function() {
-  preamble();
   log(1, "Development mode!");
+  preamble();
   core.regen_all();
   core.watch();
 };
 
 var buildmode = function() {
-  preamble();
   log(1, "Building site!");
+  preamble();
   core.regen_all();
 };
 
