@@ -6,4 +6,6 @@ example/_public
 example/content/files/
 node_modules/
 
+spec/out
+
 postit/
