@@ -1,11 +1,10 @@
 public/
 _public/
+postit/
+
 example/public
 example/_public
-
 example/content/files/
-node_modules/
 
 spec/out
-
-postit/
+node_modules/
