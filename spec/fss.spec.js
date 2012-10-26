@@ -8,9 +8,9 @@ exports.isDefined = function(test) {
 };
 
 exports.isProcessableFile = function(test) {
-  config.appdir = "spec/mocks";
-  test.ok(fss.isProcessableFile(config, "spec/mocks/_a"), "_a");
-  test.ok(fss.isProcessableFile(config, "spec/mocks/a"),  "a");
-  test.ok(!fss.isProcessableFile(config, "spec/mocks/.a"), ".a");
+  config.appdir = "spec/mocks/1";
+  test.ok(fss.isProcessableFile(config, "spec/mocks/1/_a"), "_a");
+  test.ok(fss.isProcessableFile(config, "spec/mocks/1/a"),  "a");
+  test.ok(!fss.isProcessableFile(config, "spec/mocks/1/.a"), ".a");
   test.done();
 };

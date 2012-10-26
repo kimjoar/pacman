@@ -17,6 +17,7 @@
     "commander": "",
     "colors": "",
     "wrench": "",
+    "async": "",
     "rimraf": "",
     "watch": "",
     "date-utils": "",
