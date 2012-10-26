@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 var program  = require("commander"),
-    config   = require("../lib/config").config;
-    core     = require("../lib/core").core,
-    log      = require("../lib/log").log;
-    server   = require("../lib/server").server;
+    _        = require('underscore')._,
+    config   = require("../lib/config"),
+    core     = require("../lib/core"),
+    log      = require("../lib/log"),
+    server   = require("../lib/server");
 
 program
   .version(config.version)
@@ -21,9 +22,10 @@ if(!program.server && !program.dev && !program.build) {
   program.help();
 }
 
-config.load().override(program, [
+config.silent = false;
+config.extend(_.pick(program, [
   "source", "target", "port", "dev", "build", "server", "ignore"
-]);
+]));
 
 var preamble = function() {
   log();
@@ -45,6 +47,6 @@ var buildmode = function() {
   core.regenAll();
 };
 
-if(config.server) server.start(config);
+if(config.server) server();
 if(config.dev && !config.build) devmode();
 if(config.build) buildmode();

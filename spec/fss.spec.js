@@ -1,4 +1,4 @@
-var config = require("../lib/config").config;
+var config = require("../lib/config");
 var fss    = require("../lib/fss");
 var _      = require('underscore')._;
 
@@ -8,9 +8,11 @@ exports.isDefined = function(test) {
 };
 
 exports.isProcessableFile = function(test) {
-  config.appdir = "spec/mocks/1";
-  test.ok(fss.isProcessableFile(config, "spec/mocks/1/_a"), "_a");
-  test.ok(fss.isProcessableFile(config, "spec/mocks/1/a"),  "a");
-  test.ok(!fss.isProcessableFile(config, "spec/mocks/1/.a"), ".a");
+  config.init({
+    appdir: "spec/mocks/1"
+  });
+  test.ok(fss.isProcessableFile("spec/mocks/1/_a"), "_a");
+  test.ok(fss.isProcessableFile("spec/mocks/1/a"),  "a");
+  test.ok(!fss.isProcessableFile("spec/mocks/1/.a"), ".a");
   test.done();
 };
