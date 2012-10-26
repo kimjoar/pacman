@@ -25,6 +25,7 @@
     "clean-css": "",
     "connect": ""
   },
-  "devDependencies": {},
-  "optionalDependencies": {}
+  "scripts": {
+    "test": "./test"
+  }
 }
