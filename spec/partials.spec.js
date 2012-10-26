@@ -9,7 +9,7 @@ exports.partialsAreInCorrectOrder = function(test) {
     pubdir: "spec/out/2",
     queue:  false
   });
-
+  fss.resetDir(config.pubdir);
   core.regenAll();
   test.equal("1 2 3 4 5 6 7", fss.readFile("spec/out/2/index.html"));
   test.done();
@@ -21,7 +21,7 @@ exports.partialsCanSetVars = function(test) {
     pubdir: "spec/out/3",
     queue:  false
   });
-
+  fss.resetDir(config.pubdir);
   core.regenAll();
   test.equal("1 a pa 1", fss.readFile("spec/out/3/a.html"));
   test.equal("2 b pb 2", fss.readFile("spec/out/3/b.html"));
