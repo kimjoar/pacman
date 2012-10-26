@@ -1,13 +1,11 @@
 {
   "author": "ol4v",
   "name": "faster",
-  "description": "A fast static site generator.",
+  "description": "Faster.",
   "version": "0.0.0",
   "repository": {
-    "url": ""
-  },
-  "engines": {
-    "node": "~0.6.9"
+    "type" : "git",
+    "url": "https://github.com/olav/Faster.git"
   },
   "bin": {
     "faster": "bin/faster"
