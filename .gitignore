@@ -1,5 +1,7 @@
 public/
 _public/
+example/public
+example/_public
 
-example/files/
+example/content/files/
 node_modules/

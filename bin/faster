@@ -11,8 +11,8 @@ program
   .option("-d, --dev",              "development mode: auto-generate changed files")
   .option("-b, --build",            "build mode: build a complete version, with packed assets")
   .option("-s, --server",           "serve content from the target directory on localhost")
-  .option("-t, --target  <value>",  "specify a different target directory (default ../public)")
-  .option("-f, --from    <value>",  "specify a different source directory (default current dir)")
+  .option("-t, --target  <value>",  "specify a different target directory (default ./public)")
+  .option("-f, --from    <value>",  "specify a different source directory (default ./content)")
   .option("-p, --port    <value>",  "specify a different server port (default 3000)")
   .option("-i, --ignore  <value>",  "ignore files with value in path (csv)", config.split)
   .parse(process.argv);

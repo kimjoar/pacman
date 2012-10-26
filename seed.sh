@@ -1,16 +1,22 @@
 #!/bin/bash
 
+echo "Dirs"
+
 rm -rf example/public
-rm -rf example/files
-mkdir -p example/files/txt
-mkdir -p example/files/html
+rm -rf example/content/files
+mkdir -p example/content/files/txt
+mkdir -p example/content/files/html
 
-for i in {1..20000}; do
-    echo $i
-    echo "$i" > "example/files/txt/$(echo $i).txt"
+echo "Text files"
+
+for i in {1..5000}; do
+    echo "$i" > "example/content/files/txt/$(echo $i).txt"
 done
 
-for i in {1..20000}; do
-    echo $i
-    echo "$i" > "example/files/html/$(echo $i).html"
+echo "HTML files"
+
+for i in {1..5000}; do
+    echo "$i" > "example/content/files/html/$(echo $i).html"
 done
+
+echo "Done"
