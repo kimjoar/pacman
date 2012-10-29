@@ -13,7 +13,6 @@
   "dependencies": {
     "underscore": "",
     "commander": "",
-    "colors": "",
     "wrench": "",
     "async": "",
     "rimraf": "",

@@ -28,24 +28,22 @@ config.extend(_.pick(program, [
 ]));
 
 var preamble = function() {
-  log();
-  log(3, "Source:", config.appdir);
-  log(3, "Target:", config.pubdir);
-  log();
+  log("Source", config.appdir);
+  log("Target", config.pubdir);
 };
 
 var devmode = function() {
-  log(1, "Development mode!");
   preamble();
   core.regenAll();
   core.watch();
 };
 
 var buildmode = function() {
-  log(1, "Building site!");
   preamble();
   core.regenAll();
 };
+
+log();
 
 if(config.server) server();
 if(config.dev && !config.build) devmode();
