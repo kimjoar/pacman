@@ -36,15 +36,16 @@ var devmode = function() {
   preamble();
   core.regenAll();
   core.watch();
+  log();
 };
 
 var buildmode = function() {
   preamble();
   core.regenAll();
+  log();
 };
 
 log();
-
 if(config.server) server();
 if(config.dev && !config.build) devmode();
 if(config.build) buildmode();
