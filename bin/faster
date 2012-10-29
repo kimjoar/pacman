@@ -12,7 +12,7 @@ program
   .version(config.version)
   .option("-d, --dev",              "development mode: serve content directly")
   .option("-b, --build",            "build mode: build a complete version, with packed assets")
-  .option("-s, --server",           "start a server from the target directory")
+  .option("-s, --server",           "start a server from the build directory")
   .option("-t, --target  <value>",  "specify a different target directory (default ./public)")
   .option("-f, --from    <value>",  "specify a different source directory (default ./content)")
   .option("-c, --config  <value>",  "specify a different config file (default ./config.js)")
