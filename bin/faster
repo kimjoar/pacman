@@ -10,9 +10,9 @@ var program  = require("commander"),
 
 program
   .version(config.version)
-  .option("-d, --dev",              "development mode: auto-generate changed files")
+  .option("-d, --dev",              "development mode: serve content directly")
   .option("-b, --build",            "build mode: build a complete version, with packed assets")
-  .option("-s, --server",           "serve content from the target directory on localhost")
+  .option("-s, --server",           "start a server from the target directory")
   .option("-t, --target  <value>",  "specify a different target directory (default ./public)")
   .option("-f, --from    <value>",  "specify a different source directory (default ./content)")
   .option("-c, --config  <value>",  "specify a different config file (default ./config.js)")
@@ -37,11 +37,11 @@ var devmode = function() {
 var buildmode = function() {
   log("Source", fss.baseRelative(config.appdir));
   log("Target", fss.baseRelative(config.pubdir));
-  server.build();
   core.regenAll();
   log();
 };
 
 log();
-if(config.dev) devmode();
+if(config.dev && !config.build) devmode();
+if(config.server && !config.dev) server.build();
 if(config.build) buildmode();
