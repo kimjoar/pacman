@@ -22,6 +22,10 @@
     "clean-css": "",
     "connect": ""
   },
+  "devDependencies": {
+    "jshint": "",
+    "nodeunit": ""
+  },
   "scripts": {
     "test": "./test"
   }
