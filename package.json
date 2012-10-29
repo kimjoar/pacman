@@ -16,11 +16,11 @@
     "wrench": "",
     "async": "",
     "rimraf": "",
-    "watch": "",
     "date-utils": "",
     "uglify-js2": "",
     "clean-css": "",
-    "connect": ""
+    "express": "",
+    "mime": ""
   },
   "devDependencies": {
     "jshint": "",

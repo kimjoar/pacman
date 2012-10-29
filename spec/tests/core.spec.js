@@ -31,10 +31,3 @@ exports.canRegenManyFiles = function(test) {
   test.equal("2.html", fss.readFile(f2));
   test.done();
 };
-
-exports.canRegenType = function(test) {
-  core.regenType("html");
-  test.equal("1.html", fss.readFile(f1));
-  test.equal("2.html", fss.readFile(f2));
-  test.done();
-};

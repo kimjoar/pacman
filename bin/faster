@@ -28,25 +28,20 @@ config.extend(_.pick(program, [
   "source", "target", "port", "dev", "build", "server", "ignore"
 ]));
 
-var preamble = function() {
-  log("Source", fss.baseRelative(config.appdir));
-  log("Target", fss.baseRelative(config.pubdir));
-};
-
 var devmode = function() {
-  preamble();
-  core.regenAll();
-  core.watch();
+  log("Source", fss.baseRelative(config.appdir));
+  server.dev();
   log();
 };
 
 var buildmode = function() {
-  preamble();
+  log("Source", fss.baseRelative(config.appdir));
+  log("Target", fss.baseRelative(config.pubdir));
+  server.build();
   core.regenAll();
   log();
 };
 
 log();
-if(config.server) server();
-if(config.dev && !config.build) devmode();
+if(config.dev) devmode();
 if(config.build) buildmode();
