@@ -12,8 +12,9 @@ exports.isProcessableFile = function(test) {
   config.init({
     appdir: "spec/cases/files"
   });
-  test.ok(fss.isProcessableFile("spec/cases/files/_a"), "_a");
-  test.ok(fss.isProcessableFile("spec/cases/files/a"),  "a");
-  test.ok(!fss.isProcessableFile("spec/cases/files/.a"), ".a");
+  test.ok( fss.isProcessableFile("spec/cases/files/_a"), "_a");
+  test.ok( fss.isProcessableFile("spec/cases/files/a"),  "a");
+  test.ok( fss.isProcessableFile("spec/cases/files/.a"), ".a");
+  test.ok(!fss.isProcessableFile("spec/cases/files"),    "dir");
   test.done();
 };

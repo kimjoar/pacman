@@ -35,3 +35,8 @@ exports.canRegenType = function(test) {
   test.equal("2.html", fss.readFile("spec/out/html/2.html"));
   test.done();
 };
+
+exports.canRegenOnChange = function(test) {
+  test.ok(false);
+  test.done();
+};
