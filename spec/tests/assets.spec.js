@@ -44,3 +44,11 @@ exports.canGenerateBuildAssets = function(test) {
 
   test.done();
 };
+
+exports.canGenerateIgnoredAssets = function(test) {
+  config.ignore_processing = ["templates/", "t2.html"];
+  core.regenAll();
+  test.equal(fss.readFile("spec/out/assets/templates/t1.html"), '<%= render("foo", "foo") %>');
+  test.equal(fss.readFile("spec/out/assets/templates/t2.html"), '<%= render("bar", "bar") %>');
+  test.done();
+};
