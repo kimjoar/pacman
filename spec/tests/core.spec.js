@@ -7,8 +7,7 @@ exports.setUp = function(callback) {
   config.init({
     appdir: "spec/cases/html",
     pubdir: "spec/out/html",
-    layout: false,
-    queue:  false
+    layout: false
   });
   fss.resetDir(config.pubdir);
   callback();

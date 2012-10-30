@@ -17,7 +17,6 @@ exports.setUp = function(callback) {
     pubdir: "spec/out/assets",
     path:   "spec/cases/assets/assets1.js",
     layout: false,
-    queue:  false,
     dev:    true
   });
   fss.resetDir(config.pubdir);

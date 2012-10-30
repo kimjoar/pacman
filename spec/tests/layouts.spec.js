@@ -17,8 +17,7 @@ exports.canSkipLayout = function(test) {
   config.init({
     appdir: "spec/cases/layouts",
     pubdir: "spec/out/layouts",
-    layout: false,
-    queue:  false
+    layout: false
   });
   testContent(test, "c");
   test.done();
@@ -27,8 +26,7 @@ exports.canSkipLayout = function(test) {
 exports.canUseDefaultLayout = function(test) {
   config.init({
     appdir: "spec/cases/layouts",
-    pubdir: "spec/out/layouts",
-    queue:  false
+    pubdir: "spec/out/layouts"
   });
   testContent(test, "d c d");
   test.done();
@@ -38,8 +36,7 @@ exports.canUseCustomLayoutPath = function(test) {
   config.init({
     appdir: "spec/cases/layouts",
     pubdir: "spec/out/layouts",
-    layout: "_ls/1.html",
-    queue:  false
+    layout: "_ls/1.html"
   });
   testContent(test, "1 c 1");
   config.layout = "_ls/2.html";

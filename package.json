@@ -14,7 +14,6 @@
     "underscore": "",
     "commander": "",
     "wrench": "",
-    "async": "",
     "rimraf": "",
     "date-utils": "",
     "uglify-js2": "",
@@ -23,7 +22,6 @@
     "mime": ""
   },
   "devDependencies": {
-    "jshint": "",
     "nodeunit": ""
   },
   "scripts": {

@@ -6,8 +6,7 @@ var _      = require('underscore')._;
 exports.partialsAreInCorrectOrder = function(test) {
   config.init({
     appdir: "spec/cases/part",
-    pubdir: "spec/out/part",
-    queue:  false
+    pubdir: "spec/out/part"
   });
   fss.resetDir(config.pubdir);
   core.regenAll();
@@ -18,8 +17,7 @@ exports.partialsAreInCorrectOrder = function(test) {
 exports.partialsCanSetVars = function(test) {
   config.init({
     appdir: "spec/cases/vars",
-    pubdir: "spec/out/vars",
-    queue:  false
+    pubdir: "spec/out/vars"
   });
   fss.resetDir(config.pubdir);
   core.regenAll();
