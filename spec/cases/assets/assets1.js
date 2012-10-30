@@ -1,8 +1,10 @@
 exports.config = {
 
+  ignore_processing: ["/templates/"],
+
   assets: {
-    js:  { group1: [ "js/1.js"   ] },
-    css: { group2: [ "css/1.css" ] }
+    js:        { group1: [ "/js/1.js" ] },
+    css:       { group2: [ "/css" ] }
   }
 
 };
