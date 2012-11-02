@@ -8,7 +8,7 @@
     "url": "https://github.com/olav/pacman.git"
   },
   "bin": {
-    "packman": "bin/pacman"
+    "pacman": "bin/pacman"
   },
   "dependencies": {
     "underscore": "",
