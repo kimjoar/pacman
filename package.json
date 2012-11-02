@@ -1,14 +1,14 @@
 {
   "author": "Olav Bjorkoy <olav@bjorkoy.com>",
-  "name": "packman",
-  "description": "Packman is a fast static site generator, built for large sites with many files.",
+  "name": "pacman",
+  "description": "Pacman is a fast static site generator, built for large sites with many files.",
   "version": "0.1.0",
   "repository": {
     "type" : "git",
-    "url": "https://github.com/olav/packman.git"
+    "url": "https://github.com/olav/pacman.git"
   },
   "bin": {
-    "packman": "bin/packman"
+    "packman": "bin/pacman"
   },
   "dependencies": {
     "underscore": "",

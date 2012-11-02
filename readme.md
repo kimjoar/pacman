@@ -1,8 +1,4 @@
-![Packman](https://raw.github.com/olav/packman/master/img/packman.png)
-
----
-
-Packman is a fast static site generator, built for large sites with many files.
+`pacman` is a fast static site generator, built for large sites with many files.
 
 This is still a work in progress, and not yet ready for production.
 
@@ -10,7 +6,7 @@ Version 0.1.0.
 
 ---
 
-    Usage: packman [options]
+    Usage: pacman [options]
 
     Options:
 
