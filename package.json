@@ -1,5 +1,6 @@
 {
   "author": "Olav Bjorkoy",
+  "email": "olav@bjorkoy.com",
   "name": "Packman",
   "description": "Packman is a fast static site generator, built for large sites with many files.",
   "version": "0.1.0",
