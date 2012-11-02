@@ -1,4 +1,4 @@
-![Packman](https://github.com/user/repository/raw/master/img/packman.png)
+![Packman](https://raw.github.com/olav/packman/master/img/packman.png)
 
 ---
 
