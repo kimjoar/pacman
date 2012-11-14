@@ -19,21 +19,33 @@ program
   .option("-p, --port    <value>",  "specify a different server port (default 3000)")
   .parse(process.argv);
 
+/*
+ * If no options are given, show the help prompt.
+ */
 if(!program.server && !program.dev && !program.build) {
   program.help();
 }
 
+/*
+ * Overwrite the default config with custom command line configuration.
+ */
 config.silent = false;
 config.extend(_.pick(program, [
   "source", "target", "port", "dev", "build", "server", "ignore"
 ]));
 
+/*
+ * Star the system in dev mode.
+ */
 var devmode = function() {
   log("Source", fss.baseRelative(config.appdir));
   server.dev();
   log();
 };
 
+/*
+ * Start the system in build mode.
+ */
 var buildmode = function() {
   log("Source", fss.baseRelative(config.appdir));
   log("Target", fss.baseRelative(config.pubdir));
@@ -41,6 +53,9 @@ var buildmode = function() {
   log();
 };
 
+/*
+ * Decide what to do.
+ */
 log();
 if(config.dev && !config.build) devmode();
 if(config.server && !config.dev) server.build();
