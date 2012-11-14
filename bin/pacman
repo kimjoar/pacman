@@ -8,6 +8,9 @@ var program  = require("commander"),
     fss      = require("../lib/fss"),
     server   = require("../lib/server");
 
+/*
+ * Parse command line flags.
+ */
 program
   .version(config.version)
   .option("-d, --dev",              "development mode: serve content directly")
@@ -35,7 +38,7 @@ config.extend(_.pick(program, [
 ]));
 
 /*
- * Star the system in dev mode.
+ * Start the system in dev mode.
  */
 var devmode = function() {
   log("Source", fss.baseRelative(config.appdir));
