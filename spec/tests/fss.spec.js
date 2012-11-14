@@ -14,7 +14,7 @@ exports.isProcessableFile = function(test) {
   });
   test.ok( fss.isProcessableFile("spec/cases/files/_a"), "_a");
   test.ok( fss.isProcessableFile("spec/cases/files/a"),  "a");
-  test.ok( fss.isProcessableFile("spec/cases/files/.a"), ".a");
+  test.ok(!fss.isProcessableFile("spec/cases/files/.a"), ".a");
   test.ok(!fss.isProcessableFile("spec/cases/files"),    "dir");
   test.done();
 };
