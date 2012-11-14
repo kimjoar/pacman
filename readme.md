@@ -1,10 +1,8 @@
-`pacman` is a fast static site generator, built for large sites with many files.
+# Pacman
 
-This is still a work in progress, and not yet ready for production.
+Pacman is a fast static site generator, built for large sites with many files.
 
-Version 0.1.0.
-
----
+This is still a work in progress, and is in no way ready for production.
 
     Usage: pacman [options]
 
