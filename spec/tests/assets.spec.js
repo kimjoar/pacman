@@ -39,7 +39,7 @@ exports.canGenerateBuildAssets = function(test) {
   test.equal(fss.readFile("spec/out/assets/js.html"),  js("/assets/group1.js"));
 
   test.equal(fss.readFile("spec/out/assets/assets/group2.css"), "*{z-index:1}");
-  test.equal(fss.readFile("spec/out/assets/assets/group1.js"),  "var a=1");
+  test.equal(fss.readFile("spec/out/assets/assets/group1.js"),  "var a=1;");
 
   test.done();
 };
