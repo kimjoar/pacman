@@ -2,9 +2,9 @@
   "author": "Olav Bjorkoy <olav@bjorkoy.com>",
   "name": "pacman",
   "description": "Pacman is a fast static site generator, built for large sites with many files.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "https://github.com/olav/pacman.git"
   },
   "bin": {
