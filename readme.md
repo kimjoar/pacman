@@ -2,7 +2,7 @@
 
 Pacman is a fast static site generator, built for large sites with many files.
 
-This is still a work in progress, and is in no way ready for production.
+This is still a work in progress, and in no way ready for production.
 
     Usage: pacman [options]
 
@@ -17,3 +17,4 @@ This is still a work in progress, and is in no way ready for production.
       -f, --from    <value>  specify a different source directory (default ./content)
       -c, --config  <value>  specify a different config file (default ./config.js)
       -p, --port    <value>  specify a different server port (default 3000)
+      -r, --rsync            rsync target dir to remote, as specified in the config file
