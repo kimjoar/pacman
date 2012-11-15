@@ -6,6 +6,7 @@ var program  = require("commander"),
     core     = require("../lib/core"),
     log      = require("../lib/log"),
     fss      = require("../lib/fss"),
+    deploy   = require("../lib/deploy"),
     server   = require("../lib/server");
 
 /*
@@ -20,12 +21,13 @@ program
   .option("-f, --from    <value>",  "specify a different source directory (default ./content)")
   .option("-c, --config  <value>",  "specify a different config file (default ./config.js)")
   .option("-p, --port    <value>",  "specify a different server port (default 3000)")
+  .option("-r, --rsync",            "rsync target dir to remote, as specified in the config file")
   .parse(process.argv);
 
 /*
  * If no options are given, show the help prompt.
  */
-if(!program.server && !program.dev && !program.build) {
+if(!program.server && !program.dev && !program.build && !program.rsync) {
   program.help();
 }
 
@@ -34,7 +36,7 @@ if(!program.server && !program.dev && !program.build) {
  */
 config.silent = false;
 config.extend(_.pick(program, [
-  "source", "target", "port", "dev", "build", "server", "ignore"
+  "source", "target", "port", "dev", "build", "server", "rsync"
 ]));
 
 /*
@@ -57,9 +59,18 @@ var buildmode = function() {
 };
 
 /*
+ * Deploy the target directory using rsync.
+ */
+var rsync = function() {
+  log("rsync", "deploying target directory");
+  deploy.perform();
+};
+
+/*
  * Decide what to do.
  */
 log();
 if(config.dev && !config.build) devmode();
 if(config.server && !config.dev) server.build();
 if(config.build) buildmode();
+if(!config.dev && !config.server && config.rsync) rsync();
