@@ -38,8 +38,6 @@ Pacman has two distinct modes: dev mode and build mode.
 * **In build mode**, all files are processed and all assets are packed, producing a directory that can be uploaded
 to your server.
 
-Excluding libraries, Pacman is just about 500 lines of JS.
-
 ---
 
 ### Install
@@ -100,7 +98,7 @@ Here are some common use cases:
 # Development mode: serve files directly from ./content
 $ pacman -d
 
-# Build mode: Process all files and assets into ./public
+# Build mode: process all files and assets into ./public
 $ pacman -b
 
 # Build and deploy: build site, and rsync changes to your remote server
@@ -151,9 +149,7 @@ In your layout, you have the variable `content`, which denotes where the main co
     <title>My Site</title>
 </head>
 <body>
-<div id="page">
     <%= content %>
-</div>
 </body>
 </html>
 ```
@@ -187,16 +183,14 @@ To include your assets, use the `assets` helper, quite possibly in your layout f
     <%= assets("css", "group1") %>
 </head>
 <body>
-<div id="page">
     <%= content %>
-</div>
-<%= assets("js", "group2") %>
+    <%= assets("js", "group2") %>
 </body>
 </html>
 ```
 
 
-### Config.js
+### Config
 
 Pacman will look for a `config.js` file in the directory in which it is run.
 You can override where to look for the config with the `-c` command line flag.
@@ -235,11 +229,11 @@ and any custom HTML helper functions.
 In this example, we have two types of assets (CSS and JS), which each have one group of assets.
 If the order is not important, you can use folder names instead of filenames,
 and each file in that directory will be included.
-Each asset file path is sufficed with a `?v=<current_build_timestamp>` for proper cache busting.
+Each asset file path is suffixed with a `?v=<current_build_timestamp>` for proper cache busting.
 You can disable this with the `config.timestamp` flag.
 
 We have a helper function (`hello`), usable in any HTML file.
-These assets can be referenced in an HTML file like this:
+The assets can be referenced in an HTML file like this:
 
 ```
 <%= assets("css", "group1") %>
