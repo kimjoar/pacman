@@ -38,7 +38,7 @@ to your server.
 
 To install pacman, use npm:
 
-```console
+```
 $ npm install pacman -g
 ```
 
@@ -46,7 +46,7 @@ $ npm install pacman -g
 
 Pacman could be used in a directory with the following structure:
 
-```console
+```
 mysite/
     config.js        -- the pacman config file (more on this later)
     public/          -- the folder where the build-mode generated site is placed
@@ -66,7 +66,7 @@ mysite/
 
 Here is how to use Pacman from the command line:
 
-```console
+```
 Usage: pacman [options]
 
 Options:
@@ -88,7 +88,7 @@ Options:
 
 Here are some common use cases:
 
-```console
+```
 # Development mode: serve files directly from ./content
 $ pacman -d
 
@@ -109,7 +109,7 @@ $ pacman -b -s
 Pacman uses JS microtemplates from Underscore.js to parse HTML-files.
 For example, putting the following in your HTML-file will output the current Unix timestamp:
 
-```js+erb
+```html
 <%= (new Date()).getTime() %>
 ```
 
@@ -123,7 +123,7 @@ to pass variables between files, partials and layouts.
 Partials are small bits of HTML that you need on more than one page. Render another HTML file
 (most often from your `_partials` directory) by using the `render` helper:
 
-```js+erb
+```html
 <%= render("partial", "_partials/myFile.html") %>
 ```
 
@@ -136,7 +136,7 @@ Layouts are used to surround your HTML files with standard content, like the doc
 Place your layout in `_layouts/default.html`, and it will be used automatically.
 In your layout, you have the variable `content`, which denotes where the main content should be placed:
 
-```js+erb
+```html
 <!doctype html>
 <html>
 <head>
@@ -171,7 +171,7 @@ Assets (for now, just JS and CSS files) are served as they are in dev mode, and 
 
 To include your assets, use the `assets` helper, quite possibly in your layout file:
 
-```js+erb
+```html
 <!doctype html>
 <html>
 <head>
@@ -235,14 +235,14 @@ You can disable this with the `config.timestamp` flag.
 
 These assets can be referenced in any HTML file like this:
 
-```js+erb
+```html
     <%= assets("css", "group1") %>
     <%= assets("js", "group2") %>
 ```
 
 We also have one helper function (`hello`), which can be used in any HTML file:
 
-```js+erb
+```html
     <%= hello() %>
 ```
 
