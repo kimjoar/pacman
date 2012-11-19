@@ -4,6 +4,7 @@ postit/
 webapp/
 
 example/public
+example/remote
 example/_public
 example/content/files/
 
