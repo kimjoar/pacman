@@ -14,14 +14,17 @@ var program  = require("commander"),
  */
 program
   .version(config.version)
-  .option("-d, --dev", "development mode: serve content directly")
+  .option("")
+  .option("-d, --dev", "dev mode: serve content directly")
   .option("-b, --build", "build mode: build a complete version, with packed assets")
+  .option("")
   .option("-s, --server", "start a server from the build directory")
-  .option("-t, --target <value>",  "specify a different target directory (default ./public)")
-  .option("-f, --from <value>",  "specify a different source directory (default ./content)")
-  .option("-c, --config <value>",  "specify a different config file (default ./config.js)")
-  .option("-p, --port <value>",  "specify a different server port (default 3000)")
-  .option("-r, --rsync <remote>", "rsync target dir to remote server")
+  .option("-p, --port <value>", "specify a different server port (default 3000)")
+  .option("")
+  .option("-c, --config <value>", "specify a different config file (default ./config.js)")
+  .option("-f, --from <value>", "specify a different source directory (default ./content)")
+  .option("-t, --target <value>", "specify a different target directory (default ./public)")
+  .option("-r, --rsync <target>", "rsync target dir to remote server or local dir")
   .parse(process.argv);
 
 /*
@@ -32,11 +35,15 @@ if(!program.server && !program.dev && !program.build && !program.rsync) {
 }
 
 /*
- * Overwrite the default config with custom command line configuration.
+ * Silent mode is for programmatic use of pacman.
  */
 config.silent = false;
+
+/*
+ * Overwrite the default config with custom command line configuration.
+ */
 config.extend(_.pick(program, [
-  "source", "target", "port", "dev", "build", "server", "rsync"
+  "dev", "build", "server", "target", "from", "config", "port", "rsync"
 ]));
 
 /*
