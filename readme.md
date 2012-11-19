@@ -33,7 +33,29 @@ Pacman also has built-in support for deploying via `rsync`.
 
 With `rsync` you can deploy your site by only uploading those files which have changed. Fast!
 
+
 ### Usage
+
+To install pacman, use NPM:
+
+    $ npm install pacman -g
+
+By default, Pacman should be used in a directory with the following structure
+(which can be changed to your liking):
+
+    mysite/
+        config.js        -- the pacman config file (more on this later)
+        public/          -- the folder where the build-mode generated site is placed
+        content/         -- the content for your site
+            index.html   -- an index file for your site, along with any other file
+            _partials/   -- a folder with all your partials
+            _layouts/    -- a folder with all your layouts
+
+Pacman will generate content from the `content` directory, and place the resulting built site in the `public` directory.
+You can change the names of these folders from the command line, or in the `config.js` file.
+Files or folders starting with `_` will not be processed into the `public` directory.
+Other than that, the names of the folders are not important in any way.
+
 
     Usage: pacman [options]
 
@@ -53,23 +75,6 @@ With `rsync` you can deploy your site by only uploading those files which have c
       --source <path>       change source directory  (default ./content)
       --target <path>       change target directory  (default ./public)
 
-
-### Basic setup
-
-By default, should be used in a directory with the following structure (which can be changed to your liking):
-
-    mysite/
-        config.js        -- the pacman config file (more on this later)
-        public/          -- the folder where the build-mode generated site is placed
-        content/         -- the content for your site
-            index.html   -- an index file for your site, along with any other file
-            _partials/   -- a folder with all your partials
-            _layouts/    -- a folder with all your layouts
-
-Pacman will generate content from the `content` directory, and place the resulting built site in the `public` directory.
-You can change the names of these folders from the command line, or in the `config.js` file.
-Files or folders starting with `_` will not be processed into the `public` directory.
-Other than that, the names of the folders are not important in any way.
 
 In dev mode, all files are served directly from the `content` directory, and no files will be generated:
 
