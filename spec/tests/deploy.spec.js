@@ -2,7 +2,6 @@ var config = require("../../lib/config");
 var core   = require("../../lib/core");
 var fss    = require("../../lib/fss");
 var deploy = require("../../lib/deploy");
-var _      = require('underscore')._;
 
 exports.setUp = function(callback) {
   config.init({
