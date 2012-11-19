@@ -38,19 +38,23 @@ to your server.
 
 To install pacman, use npm:
 
-    $ npm install pacman -g
+```console
+$ npm install pacman -g
+```
 
 ### Setup
 
 Pacman could be used in a directory with the following structure:
 
-    mysite/
-        config.js        -- the pacman config file (more on this later)
-        public/          -- the folder where the build-mode generated site is placed
-        content/         -- the content for your site
-            index.html   -- an index file for your site, along with any other file
-            _partials/   -- a folder with all your partials
-            _layouts/    -- a folder with all your layouts
+```console
+mysite/
+    config.js        -- the pacman config file (more on this later)
+    public/          -- the folder where the build-mode generated site is placed
+    content/         -- the content for your site
+        index.html   -- an index file for your site, along with any other file
+        _partials/   -- a folder with all your partials
+        _layouts/    -- a folder with all your layouts
+```
 
 * Pacman will generate content from the `content` directory,
 * The resulting site will be placed in the `public` directory.
@@ -62,43 +66,41 @@ Pacman could be used in a directory with the following structure:
 
 Here is how to use Pacman from the command line:
 
-    Usage: pacman [options]
+```console
+Usage: pacman [options]
 
-    Options:
+Options:
 
-      -h, --help            output usage information
-      -V, --version         output the version number
+  -h, --help            output usage information
+  -V, --version         output the version number
 
-      -d, --dev             dev mode: serve content directly
-      -p, --port <port>     specify a different server port (default 3000)
+  -d, --dev             dev mode: serve content directly
+  -p, --port <port>     specify a different server port (default 3000)
 
-      -b, --build           build mode: build a complete version, with packed assets
-      -s, --server          start a server from the target directory
-      -r, --rsync <target>  rsync target dir to remote server or local dir
+  -b, --build           build mode: build a complete version, with packed assets
+  -s, --server          start a server from the target directory
+  -r, --rsync <target>  rsync target dir to remote server or local dir
 
-      --config <path>       change config file       (default ./config.js)
-      --source <path>       change source directory  (default ./content)
-      --target <path>       change target directory  (default ./public)
+  --config <path>       change config file       (default ./config.js)
+  --source <path>       change source directory  (default ./content)
+  --target <path>       change target directory  (default ./public)
+```
 
+Here are some common use cases:
 
-In dev mode, all files are served directly from the `content` directory, and no files will be generated:
+```console
+# Development mode: serve files directly from ./content
+$ pacman -d
 
-    $ pacman -d
+# Build mode: Process all files and assets into ./public
+$ pacman -b
 
-In build mode, all files from `content` will be processed and placed in the `public` directory.
+# Build and deploy: build site, and rsync changes to your remote server
+$ pacman -b -r user@example.com:/path/to/document/root/
 
-    $ pacman -b
-
-You can deploy your site by uploading the `public` directory to your server.
-If you want to use rsync, you can use the `-r` flag:
-
-    $ pacman -b -r user@mysite.com:/path/to/document/root/
-
-This will build all files and rsync the result to your server.
-
-If you wish to preview the built site locally, you can start a server from the `public` directory:
-
-    $ pacman -b -s
+# Preview: serve the generated ./public directory locally
+$ pacman -b -s
+```
 
 ---
 
@@ -107,7 +109,9 @@ If you wish to preview the built site locally, you can start a server from the `
 Pacman uses JS microtemplates from Underscore.js to parse HTML-files.
 For example, putting the following in your HTML-file will output the current Unix timestamp:
 
-    <%= (new Date()).getTime() %>
+```js+erb
+<%= (new Date()).getTime() %>
+```
 
 `<%= %>` is used for escaped content, and `<%- %>` is used to output unescaped content.
 You also have a few helpers, most importantly `get(key)` and `set(key, value)` which can be used
@@ -119,7 +123,9 @@ to pass variables between files, partials and layouts.
 Partials are small bits of HTML that you need on more than one page. Render another HTML file
 (most often from your `_partials` directory) by using the `render` helper:
 
-    <%= render("partial", "_partials/myFile.html") %>
+```js+erb
+<%= render("partial", "_partials/myFile.html") %>
+```
 
 Putting your partials in a folder starting with `_` ensures that they will not be copied
 into the `public` folder by themselves, but only as part of other files.
@@ -130,26 +136,30 @@ Layouts are used to surround your HTML files with standard content, like the doc
 Place your layout in `_layouts/default.html`, and it will be used automatically.
 In your layout, you have the variable `content`, which denotes where the main content should be placed:
 
-    <!doctype html>
-    <html>
-    <head>
-        <title>My Site</title>
-    </head>
-    <body>
-    <div id="page>
-        <%= content %>
-    </div>
-    </body>
-    </html>
+```js+erb
+<!doctype html>
+<html>
+<head>
+    <title>My Site</title>
+</head>
+<body>
+<div id="page">
+    <%= content %>
+</div>
+</body>
+</html>
+```
 
 You can use different layouts for different files. This is specified
 in your `config.js` file (explained at the end of this readme):
 
-    exports.config = {
-      layouts: {
-        "mypage.html": "_layouts/other.html"
-      }
-    };
+```js
+exports.config = {
+  layouts: {
+    "mypage.html": "_layouts/other.html"
+  }
+};
+```
 
 Create an object with your custom layouts, where each key should be a
 substring of the file path to match, and the value points to the layout file.
@@ -161,19 +171,21 @@ Assets (for now, just JS and CSS files) are served as they are in dev mode, and 
 
 To include your assets, use the `assets` helper, quite possibly in your layout file:
 
-    <!doctype html>
-    <html>
-    <head>
-        <title>My Site</title>
-        <%= assets("css", "group1") %>
-    </head>
-    <body>
-    <div id="page>
-        <%= content %>
-    </div>
-    <%= assets("js", "group2") %>
-    </body>
-    </html>
+```js+erb
+<!doctype html>
+<html>
+<head>
+    <title>My Site</title>
+    <%= assets("css", "group1") %>
+</head>
+<body>
+<div id="page">
+    <%= content %>
+</div>
+<%= assets("js", "group2") %>
+</body>
+</html>
+```
 
 Which assets belong in which group is specified in the `config.js` file (see the next section).
 
@@ -185,30 +197,32 @@ You can override where to look for the config with the `-c` command line flag.
 
 The config is a valid node.js module. Here is an example:
 
-    exports.config = {
+```js
+exports.config = {
 
-      assets: {
-        css: {
-          group1: [
-            "css/1.css",
-            "css/2.css"
-          ]
-        },
-        js: {
-          group2: [
-            "js/a.js",
-            "js/b.js"
-          ]
-        },
-      },
+  assets: {
+    css: {
+      group1: [
+        "css/1.css",
+        "css/2.css"
+      ]
+    },
+    js: {
+      group2: [
+        "js/a.js",
+        "js/b.js"
+      ]
+    },
+  },
 
-      helpers: {
-        hello: function() {
-          return "hello!";
-        }
-      }
+  helpers: {
+    hello: function() {
+      return "hello!";
+    }
+  }
 
-    };
+};
+```
 
 The main purpose of the file is to specify assets (in order), any default command line flags,
 and any custom HTML helper functions.
@@ -221,12 +235,20 @@ You can disable this with the `config.timestamp` flag.
 
 These assets can be referenced in any HTML file like this:
 
+```js+erb
     <%= assets("css", "group1") %>
     <%= assets("js", "group2") %>
+```
 
 We also have one helper function (`hello`), which can be used in any HTML file:
 
+```js+erb
     <%= hello() %>
+```
 
 There are many other config flags you may override. For now,
 see the file `lib/config.js` for all these flags.
+
+---
+
+License: MIT (see LICENSE).
