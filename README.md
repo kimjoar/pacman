@@ -109,7 +109,7 @@ $ pacman -b -s
 Pacman uses JS microtemplates from Underscore.js to parse HTML-files.
 For example, putting the following in your HTML-file will output the current Unix timestamp:
 
-```html
+```
 <%= (new Date()).getTime() %>
 ```
 
@@ -123,7 +123,7 @@ to pass variables between files, partials and layouts.
 Partials are small bits of HTML that you need on more than one page. Render another HTML file
 (most often from your `_partials` directory) by using the `render` helper:
 
-```html
+```
 <%= render("partial", "_partials/myFile.html") %>
 ```
 
@@ -136,7 +136,7 @@ Layouts are used to surround your HTML files with standard content, like the doc
 Place your layout in `_layouts/default.html`, and it will be used automatically.
 In your layout, you have the variable `content`, which denotes where the main content should be placed:
 
-```html
+```
 <!doctype html>
 <html>
 <head>
@@ -168,10 +168,10 @@ substring of the file path to match, and the value points to the layout file.
 ### Assets
 
 Assets (for now, just JS and CSS files) are served as they are in dev mode, and concatenated and minified in build mode.
-
+Which assets belong in which group is specified in the `config.js` file (see the next section).
 To include your assets, use the `assets` helper, quite possibly in your layout file:
 
-```html
+```
 <!doctype html>
 <html>
 <head>
@@ -187,14 +187,11 @@ To include your assets, use the `assets` helper, quite possibly in your layout f
 </html>
 ```
 
-Which assets belong in which group is specified in the `config.js` file (see the next section).
 
 ### Config.js
 
 Pacman will look for a `config.js` file in the directory in which it is run.
-
 You can override where to look for the config with the `-c` command line flag.
-
 The config is a valid node.js module. Here is an example:
 
 ```js
@@ -233,17 +230,14 @@ and each file in that directory will be included.
 Each asset file path is sufficed with a `?v=<current_build_timestamp>` for proper cache busting.
 You can disable this with the `config.timestamp` flag.
 
+We have one helper function (`hello`), which can be used in any HTML file.
 These assets can be referenced in any HTML file like this:
 
-```html
-    <%= assets("css", "group1") %>
-    <%= assets("js", "group2") %>
 ```
+<%= assets("css", "group1") %>
+<%= assets("js", "group2") %>
 
-We also have one helper function (`hello`), which can be used in any HTML file:
-
-```html
-    <%= hello() %>
+<%= hello() %>
 ```
 
 There are many other config flags you may override. For now,
