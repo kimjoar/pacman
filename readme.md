@@ -11,12 +11,17 @@ built for large sites with many files.
 
 Pacman has **no support for**:
 
-* blogging,
-* page listing,
-* markdown or
-* other templating languages.
+* Blogging
+* Page listing
+* Markdown
+* Other templating languages
 
-Also, Pacman does not try to impose any structure on how you organize your files.
+Pacman **has support for**:
+
+* Regenerating files on the fly.
+* HTML microtemplates.
+* Deploy via rsync.
+* Staying out of your way.
 
 While there are many static site generators, few are made for large sites with many files.
 The main problem is in development mode, where many static site generators regenerate all files
@@ -34,7 +39,7 @@ Pacman also has built-in support for deploying via `rsync`.
 With `rsync` you can deploy your site by only uploading those files which have changed. Fast!
 
 
-### Usage
+### Install and setup
 
 To install pacman, use NPM:
 
@@ -56,6 +61,9 @@ You can change the names of these folders from the command line, or in the `conf
 Files or folders starting with `_` will not be processed into the `public` directory.
 Other than that, the names of the folders are not important in any way.
 
+### Usage
+
+Here is how to use Pacman from the command line:
 
     Usage: pacman [options]
 
@@ -95,6 +103,7 @@ If you wish to preview the built site locally, you can start a server from the `
 
     $ pacman -b -s
 
+---
 
 ### Templates
 
@@ -107,7 +116,6 @@ For example, putting the following in your HTML-file will output the current Uni
 You also have a few helpers, most importantly `get(key)` and `set(key, value)` which can be used
 to pass variables between files, partials and layouts.
 
----
 
 ### Partials
 
