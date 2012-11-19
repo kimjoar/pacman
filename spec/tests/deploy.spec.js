@@ -13,7 +13,7 @@ exports.setUp = function(callback) {
   callback();
 };
 
-exports.canRegenOneFile = function(test) {
+exports.canDeployOneFile = function(test) {
   core.regenAll();
   deploy.perform(function() {
     test.equal("1", fss.readFile("spec/out/deploy/remote/1.html"));
