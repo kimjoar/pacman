@@ -18,23 +18,27 @@ Pacman has **no support for**:
 
 * Blogging
 * Feeds
-* Page listing
+* Pagination
+* Listing pages
 * Markdown
 * Other templating languages
 
 Pacman **has support for**:
 
-* Regenerating files on the fly.
-* HTML microtemplates.
-* Layouts and partials.
-* Deploy via rsync.
-* Staying out of your way.
+* Regenerating files on the fly
+* HTML microtemplates
+* Layouts and partials
+* Asset packaging
+* Deploy via rsync
+* Staying out of your way
 
 Pacman has two distinct modes: dev mode and build mode.
 
 * **In dev mode**, all files are served on the fly, without recompilation.
 * **In build mode**, all files are processed and all assets are packed, producing a directory that can be uploaded
 to your server.
+
+Excluding libraries, Pacman is just about 500 lines of JS.
 
 ---
 
@@ -110,16 +114,16 @@ $ pacman -b -s
 
 ### Templates
 
-Pacman uses JS microtemplates from Underscore.js to parse HTML-files.
-For example, putting the following in your HTML-file will output the current Unix timestamp:
+Pacman uses JS microtemplates from Underscore.js to parse HTML files.
+For example, putting the following in your HTML file will output the current Unix timestamp:
 
 ```
 <%= (new Date()).getTime() %>
 ```
 
-`<%= %>` is used for escaped content, and `<%- %>` is used to output unescaped content.
-You also have a few helpers, most importantly `get(key)` and `set(key, value)` which can be used
-to pass variables between files, partials and layouts.
+You also have a few built-in helpers, most importantly `get(key)` and `set(key, value)` which can be used
+to pass variables between files, partials and layouts. These variables are reset between each
+individually generated page.
 
 
 ### Partials
