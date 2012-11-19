@@ -12,12 +12,13 @@ This is still a work in progress, and in no way ready for production.
       -V, --version         output the version number
 
       -d, --dev             dev mode: serve content directly
+      -p, --port <port>     specify a different server port (default 3000)
+
       -b, --build           build mode: build a complete version, with packed assets
-
-      -s, --server          start a server from the build directory
-      -p, --port <value>    specify a different server port (default 3000)
-
-      -c, --config <value>  specify a different config file (default ./config.js)
-      -f, --from <value>    specify a different source directory (default ./content)
-      -t, --target <value>  specify a different target directory (default ./public)
+      -s, --server          start a server from the target directory
       -r, --rsync <target>  rsync target dir to remote server or local dir
+
+      --config <path>       change config file       (default ./config.js)
+      --source <path>       change source directory  (default ./content)
+      --target <path>       change target directory  (default ./public)
+

@@ -16,15 +16,15 @@ program
   .version(config.version)
   .option("")
   .option("-d, --dev", "dev mode: serve content directly")
+  .option("-p, --port <port>", "specify a different server port (default 3000)")
+  .option("")
   .option("-b, --build", "build mode: build a complete version, with packed assets")
-  .option("")
-  .option("-s, --server", "start a server from the build directory")
-  .option("-p, --port <value>", "specify a different server port (default 3000)")
-  .option("")
-  .option("-c, --config <value>", "specify a different config file (default ./config.js)")
-  .option("-f, --from <value>", "specify a different source directory (default ./content)")
-  .option("-t, --target <value>", "specify a different target directory (default ./public)")
+  .option("-s, --server", "start a server from the target directory")
   .option("-r, --rsync <target>", "rsync target dir to remote server or local dir")
+  .option("")
+  .option("--config <path>", "change config file       (default ./config.js)")
+  .option("--source <path>", "change source directory  (default ./content)")
+  .option("--target <path>", "change target directory  (default ./public)")
   .parse(process.argv);
 
 /*
@@ -43,7 +43,7 @@ config.silent = false;
  * Overwrite the default config with custom command line configuration.
  */
 config.extend(_.pick(program, [
-  "dev", "build", "server", "target", "from", "config", "port", "rsync"
+  "dev", "port", "build", "server", "rsync", "config", "source", "target"
 ]));
 
 /*
