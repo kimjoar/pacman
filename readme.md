@@ -8,6 +8,10 @@
 
 Pacman is a fast static site generator, written in node.js,
 built for large sites with many files.
+While there are many static site generators, few are made for large sites with many files.
+The main problem is in development mode, where many static site generators regenerate all files
+when a single file changes. If you have a lot of files, this means waiting a few seconds
+before you can see your changes in the browser.
 
 Pacman has **no support for**:
 
@@ -23,30 +27,21 @@ Pacman **has support for**:
 * Deploy via rsync.
 * Staying out of your way.
 
-While there are many static site generators, few are made for large sites with many files.
-The main problem is in development mode, where many static site generators regenerate all files
-when a single file changes. If you have a lot of files, this means waiting a few seconds
-before you can see your changes in the browser.
-
 Pacman has two distinct modes: dev mode and build mode.
 
 * **In dev mode**, all files are served on the fly, without recompilation.
 * **In build mode**, all files are processed and all assets are packed, producing a directory that can be uploaded
 to your server.
 
-Pacman also has built-in support for deploying via `rsync`.
+### Install
 
-With `rsync` you can deploy your site by only uploading those files which have changed. Fast!
-
-
-### Install and setup
-
-To install pacman, use NPM:
+To install pacman, use npm:
 
     $ npm install pacman -g
 
-By default, Pacman should be used in a directory with the following structure
-(which can be changed to your liking):
+### Setup
+
+Pacman could be used in a directory with the following structure:
 
     mysite/
         config.js        -- the pacman config file (more on this later)
@@ -56,10 +51,11 @@ By default, Pacman should be used in a directory with the following structure
             _partials/   -- a folder with all your partials
             _layouts/    -- a folder with all your layouts
 
-Pacman will generate content from the `content` directory, and place the resulting built site in the `public` directory.
-You can change the names of these folders from the command line, or in the `config.js` file.
-Files or folders starting with `_` will not be processed into the `public` directory.
-Other than that, the names of the folders are not important in any way.
+* Pacman will generate content from the `content` directory,
+* The resulting site will be placed in the `public` directory.
+* You can change the names of these folders from the command line, or in the `config.js` file.
+* Files or folders starting with `_` will not be processed into the `public` directory.
+* Other than that, the names of the folders are not important in any way.
 
 ### Usage
 
