@@ -8,9 +8,14 @@
 
 Pacman is a fast static site generator, written in node.js,
 built for large sites with many files.
-Its top priorities are speed and ease of use.
 
-Pacman has no built-in support for blogging, page listing, markdown or other templating languages.
+Pacman has **no support for**:
+
+* blogging,
+* page listing,
+* markdown or
+* other templating languages.
+
 Also, Pacman does not try to impose any structure on how you organize your files.
 
 While there are many static site generators, few are made for large sites with many files.
@@ -24,10 +29,11 @@ Pacman has two distinct modes: dev mode and build mode.
 * **In build mode**, all files are processed and all assets are packed, producing a directory that can be uploaded
 to your server.
 
-Pacman also has built-in support for deploying via rsync, meaning that only changed files are uploaded
-to your server, making deploying large sites fast as well.
+Pacman also has built-in support for deploying via `rsync`.
 
-## Usage
+With `rsync` you can deploy your site by only uploading those files which have changed. Fast!
+
+### Usage
 
     Usage: pacman [options]
 
@@ -48,7 +54,7 @@ to your server, making deploying large sites fast as well.
       --target <path>       change target directory  (default ./public)
 
 
-## Basic setup
+### Basic setup
 
 By default, should be used in a directory with the following structure (which can be changed to your liking):
 
@@ -84,7 +90,7 @@ If you wish to preview the built site locally, you can start a server from the `
     $ pacman -b -s
 
 
-## Templates
+### Templates
 
 Pacman uses JS microtemplates from Underscore.js to parse HTML-files.
 For example, putting the following in your HTML-file will output the current Unix timestamp:
@@ -96,7 +102,7 @@ You also have a few helpers, most importantly `get(key)` and `set(key, value)` w
 to pass variables between files, partials and layouts.
 
 
-## Partials
+### Partials
 
 Partials are small bits of HTML that you need on more than one page. Render another HTML file
 (most often from your `_partials` directory) by using the `render` helper:
@@ -106,7 +112,7 @@ Partials are small bits of HTML that you need on more than one page. Render anot
 Putting your partials in a folder starting with `_` ensures that they will not be copied
 into the `public` folder by themselves, but only as part of other files.
 
-## Layouts
+### Layouts
 
 Currently, there is only support for one layout, which will be used for all HTML files.
 Place your layout in `_layouts/default.html`, and it will be used automatically.
@@ -124,7 +130,7 @@ In your layout, you have the variable `content`, which denotes where the main co
     </body>
     </html>
 
-## Assets
+### Assets
 
 Assets (for now, just JS and CSS files) are served as they are in dev mode, and concatenated and minified in build mode.
 
@@ -146,7 +152,7 @@ To include your assets, use the `assets` helper, quite possibly in your layout f
 
 Which assets belong in which group is specified in the `config.js` file (see the next section).
 
-## Config.js
+### Config.js
 
 Pacman will look for a `config.js` file in the directory in which it is run. You can override where to
 look for the config with the `-c` command line flag.
@@ -198,12 +204,3 @@ We also have one helper function (`hello`), which can be used in any HTML file:
 
 There are many other config flags you may override. For now,
 see the file `lib/config.js` for all these flags.
-
-
-
-
-
-
-
-
-
