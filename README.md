@@ -17,6 +17,7 @@ before you can see your changes in the browser.
 Pacman has **no support for**:
 
 * Blogging
+* Feeds
 * Page listing
 * Markdown
 * Other templating languages
@@ -25,6 +26,7 @@ Pacman **has support for**:
 
 * Regenerating files on the fly.
 * HTML microtemplates.
+* Layouts and partials.
 * Deploy via rsync.
 * Staying out of your way.
 
@@ -33,6 +35,8 @@ Pacman has two distinct modes: dev mode and build mode.
 * **In dev mode**, all files are served on the fly, without recompilation.
 * **In build mode**, all files are processed and all assets are packed, producing a directory that can be uploaded
 to your server.
+
+---
 
 ### Install
 
@@ -161,7 +165,7 @@ exports.config = {
 };
 ```
 
-Create an object with your custom layouts, where each key should be a
+Create an object with your custom layouts, called `layouts`, where each key should be a
 substring of the file path to match, and the value points to the layout file.
 
 
@@ -230,8 +234,8 @@ and each file in that directory will be included.
 Each asset file path is sufficed with a `?v=<current_build_timestamp>` for proper cache busting.
 You can disable this with the `config.timestamp` flag.
 
-We have one helper function (`hello`), which can be used in any HTML file.
-These assets can be referenced in any HTML file like this:
+We have a helper function (`hello`), usable in any HTML file.
+These assets can be referenced in an HTML file like this:
 
 ```
 <%= assets("css", "group1") %>
