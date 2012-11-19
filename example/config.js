@@ -1,5 +1,9 @@
 exports.config = {
 
+  layouts: {
+    "page2.html": "_layouts/other.html"
+  },
+
   assets: {
 
     js: {

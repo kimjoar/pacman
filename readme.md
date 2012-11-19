@@ -8,7 +8,8 @@
 
 Pacman is a fast static site generator, written in node.js,
 built for large sites with many files.
-While there are many static site generators, few are made for large sites with many files.
+
+While there are many static site generators, few are built to work with lots of files.
 The main problem is in development mode, where many static site generators regenerate all files
 when a single file changes. If you have a lot of files, this means waiting a few seconds
 before you can see your changes in the browser.
@@ -125,7 +126,7 @@ into the `public` folder by themselves, but only as part of other files.
 
 ### Layouts
 
-Currently, there is only support for one layout, which will be used for all HTML files.
+Layouts are used to surround your HTML files with standard content, like the doctype, your menu and footer.
 Place your layout in `_layouts/default.html`, and it will be used automatically.
 In your layout, you have the variable `content`, which denotes where the main content should be placed:
 
@@ -140,6 +141,19 @@ In your layout, you have the variable `content`, which denotes where the main co
     </div>
     </body>
     </html>
+
+You can use different layouts for different files. This is specified
+in your `config.js` file (explained at the end of this readme):
+
+    exports.config = {
+      layouts: {
+        "mypage.html": "_layouts/other.html"
+      }
+    };
+
+Create an object with your custom layouts, where each key should be a
+substring of the file path to match, and the value points to the layout file.
+
 
 ### Assets
 
