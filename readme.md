@@ -85,11 +85,12 @@ In build mode, all files from `content` will be processed and placed in the `pub
     $ pacman -b
 
 You can deploy your site by uploading the `public` directory to your server.
-If you want to use rsync, ensuring a delta deploy, you can use the `-r` flag:
+If you want to use rsync, you can use the `-r` flag:
 
-    $ pacman -b -r user@mysite.com:/path/to/document/root
+    $ pacman -b -r user@mysite.com:/path/to/document/root/
 
 This will build all files and rsync the result to your server.
+
 If you wish to preview the built site locally, you can start a server from the `public` directory:
 
     $ pacman -b -s
@@ -106,6 +107,7 @@ For example, putting the following in your HTML-file will output the current Uni
 You also have a few helpers, most importantly `get(key)` and `set(key, value)` which can be used
 to pass variables between files, partials and layouts.
 
+---
 
 ### Partials
 
@@ -159,8 +161,9 @@ Which assets belong in which group is specified in the `config.js` file (see the
 
 ### Config.js
 
-Pacman will look for a `config.js` file in the directory in which it is run. You can override where to
-look for the config with the `-c` command line flag.
+Pacman will look for a `config.js` file in the directory in which it is run.
+
+You can override where to look for the config with the `-c` command line flag.
 
 The config is a valid node.js module. Here is an example:
 
