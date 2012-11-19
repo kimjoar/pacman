@@ -14,14 +14,14 @@ var program  = require("commander"),
  */
 program
   .version(config.version)
-  .option("-d, --dev",              "development mode: serve content directly")
-  .option("-b, --build",            "build mode: build a complete version, with packed assets")
-  .option("-s, --server",           "start a server from the build directory")
-  .option("-t, --target  <value>",  "specify a different target directory (default ./public)")
-  .option("-f, --from    <value>",  "specify a different source directory (default ./content)")
-  .option("-c, --config  <value>",  "specify a different config file (default ./config.js)")
-  .option("-p, --port    <value>",  "specify a different server port (default 3000)")
-  .option("-r, --rsync",            "rsync target dir to remote, as specified in the config file")
+  .option("-d, --dev", "development mode: serve content directly")
+  .option("-b, --build", "build mode: build a complete version, with packed assets")
+  .option("-s, --server", "start a server from the build directory")
+  .option("-t, --target <value>",  "specify a different target directory (default ./public)")
+  .option("-f, --from <value>",  "specify a different source directory (default ./content)")
+  .option("-c, --config <value>",  "specify a different config file (default ./config.js)")
+  .option("-p, --port <value>",  "specify a different server port (default 3000)")
+  .option("-r, --rsync <remote>", "rsync target dir to remote server")
   .parse(process.argv);
 
 /*
