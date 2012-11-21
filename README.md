@@ -1,4 +1,4 @@
-# Pacman
+# The Pacman Project
 
 ---
 
@@ -6,8 +6,9 @@
 
 ---
 
-Pacman is a fast static site generator, written in node.js,
-built for large sites with many files.
+Pacman is a fast static site generator,
+built for large sites with many files, written in node.js
+(about 500 lines of JS).
 
 While there are many static site generators, few are built to work with lots of files.
 The main problem is in development mode, where many static site generators regenerate all files
@@ -38,9 +39,7 @@ Pacman has two distinct modes: dev mode and build mode.
 * **In build mode**, all files are processed and all assets are packed, producing a directory that can be uploaded
 to your server.
 
----
-
-### Install
+## Install
 
 To install pacman, use npm:
 
@@ -48,7 +47,7 @@ To install pacman, use npm:
 $ npm install pacman -g
 ```
 
-### Setup
+## Setup
 
 Pacman could be used in a directory with the following structure:
 
@@ -68,7 +67,7 @@ mysite/
 * Files or folders starting with `_` will not be processed into the `public` directory.
 * Other than that, the names of the folders are not important in any way.
 
-### Usage
+## Usage
 
 Here is how to use Pacman from the command line:
 
@@ -108,9 +107,7 @@ $ pacman -b -r user@example.com:/path/to/document/root/
 $ pacman -b -s
 ```
 
----
-
-### Templates
+## Templates
 
 Pacman uses JS microtemplates from Underscore.js to parse HTML files.
 For example, putting the following in your HTML file will output the current Unix timestamp:
@@ -124,7 +121,7 @@ to pass variables between files, partials and layouts. These variables are reset
 individually generated page.
 
 
-### Partials
+## Partials
 
 Partials are small bits of HTML that you need on more than one page. Render another HTML file
 (most often from your `_partials` directory) by using the `render` helper:
@@ -136,7 +133,7 @@ Partials are small bits of HTML that you need on more than one page. Render anot
 Putting your partials in a folder starting with `_` ensures that they will not be copied
 into the `public` folder by themselves, but only as part of other files.
 
-### Layouts
+## Layouts
 
 Layouts are used to surround your HTML files with standard content, like the doctype, your menu and footer.
 Place your layout in `_layouts/default.html`, and it will be used automatically.
@@ -169,7 +166,7 @@ Create an object with your custom layouts, called `layouts`, where each key shou
 substring of the file path to match, and the value points to the layout file.
 
 
-### Assets
+## Assets
 
 Assets (for now, just JS and CSS files) are served as they are in dev mode, and concatenated and minified in build mode.
 Which assets belong in which group is specified in the `config.js` file (see the next section).
@@ -190,7 +187,7 @@ To include your assets, use the `assets` helper, quite possibly in your layout f
 ```
 
 
-### Config
+## Config
 
 Pacman will look for a `config.js` file in the directory in which it is run.
 You can override where to look for the config with the `-c` command line flag.
