@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-var program  = require("commander"),
-    _        = require('underscore')._,
+var _        = require('underscore')._,
+    program  = require("commander"),
     pacman   = require("../lib/pacman");
 
 /*
