@@ -19,7 +19,7 @@ exports.setUp = function(callback) {
   config.init({
     appdir: "spec/cases/assets",
     pubdir: "spec/out/assets",
-    path:   "spec/cases/assets/assets1.js",
+    config: "spec/cases/assets/assets1.js",
     layout: false,
     dev:    true
   });
