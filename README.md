@@ -67,6 +67,7 @@ mysite/
 * Files or folders starting with `_` will not be processed into the `public` directory.
 * Other than that, the names of the folders are not important in any way.
 
+
 ## Usage
 
 Here is how to use Pacman from the command line:
@@ -102,6 +103,29 @@ $ pacman -b
 $ pacman -b -s user@example.com:/path/to/document/root/
 ```
 
+You may also use pacman programmatically:
+
+```js
+var pacman = require("pacman");
+
+// Set config flags
+pacman.config({
+  source: "/foo/bar",
+  target: "/baz/boo",
+  sync:   "foo@example.com:/path/to/document/root/"
+});
+
+// Start dev mode
+pacman.dev();
+
+// Start build mode
+pacman.build();
+
+// Deploy files
+pacman.deploy();
+```
+
+
 ## Templates
 
 Pacman uses JS microtemplates from Underscore.js to parse HTML files.
@@ -127,6 +151,7 @@ Partials are small bits of HTML that you need on more than one page. Render anot
 
 Putting your partials in a folder starting with `_` ensures that they will not be copied
 into the `public` folder by themselves, but only as part of other files.
+
 
 ## Layouts
 
