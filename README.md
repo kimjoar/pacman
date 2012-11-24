@@ -79,12 +79,11 @@ Options:
   -h, --help           output usage information
   -V, --version        output the version number
 
-  -d, --dev            dev mode: serve content directly
-  -p, --port <port>    specify a different server port (default 3000)
+  -d, --dev            serve content directly from source folder
+  -b, --build          build a complete version, with packed assets
+  -s, --sync <target>  sync target dir to remote server or local dir
 
-  -b, --build          build mode: build a complete version, with packed assets
-  -s, --sync <target>  sync target dir to remote server or local dir using rsync
-
+  --port   <port>      specify a different port (default 3000)
   --config <path>      change config file       (default ./config.js)
   --source <path>      change source directory  (default ./content)
   --target <path>      change target directory  (default ./public)
