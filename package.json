@@ -15,8 +15,7 @@
     "commander": "",
     "wrench": "",
     "rimraf": "",
-    "date-utils": "",
-    "uglify-js2": "",
+    "uglify-js": "",
     "clean-css": "",
     "express": "",
     "mime": ""
