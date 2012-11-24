@@ -1,5 +1,5 @@
 var config = require("../../lib/config");
-var core   = require("../../lib/core");
+var pacman = require("../../lib/pacman");
 var fss    = require("../../lib/fss");
 var _      = require('underscore')._;
 
@@ -9,7 +9,7 @@ exports.setUp = function(callback) {
 };
 
 var testContent = function(test, expected, path) {
-  core.regenAll();
+  pacman.build();
   test.equal(fss.readFile(path || "spec/out/layouts/index.html"), expected);
 };
 

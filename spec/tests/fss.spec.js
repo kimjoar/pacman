@@ -1,5 +1,4 @@
 var config = require("../../lib/config");
-var core   = require("../../lib/core");
 var fss    = require("../../lib/fss");
 var _      = require('underscore')._;
 

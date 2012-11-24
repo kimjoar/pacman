@@ -76,19 +76,18 @@ Usage: pacman [options]
 
 Options:
 
-  -h, --help            output usage information
-  -V, --version         output the version number
+  -h, --help           output usage information
+  -V, --version        output the version number
 
-  -d, --dev             dev mode: serve content directly
-  -p, --port <port>     specify a different server port (default 3000)
+  -d, --dev            dev mode: serve content directly
+  -p, --port <port>    specify a different server port (default 3000)
 
-  -b, --build           build mode: build a complete version, with packed assets
-  -s, --server          start a server from the target directory
-  -r, --rsync <target>  rsync target dir to remote server or local dir
+  -b, --build          build mode: build a complete version, with packed assets
+  -s, --sync <target>  sync target dir to remote server or local dir using rsync
 
-  --config <path>       change config file       (default ./config.js)
-  --source <path>       change source directory  (default ./content)
-  --target <path>       change target directory  (default ./public)
+  --config <path>      change config file       (default ./config.js)
+  --source <path>      change source directory  (default ./content)
+  --target <path>      change target directory  (default ./public)
 ```
 
 Here are some common use cases:
@@ -101,10 +100,7 @@ $ pacman -d
 $ pacman -b
 
 # Build and deploy: build site, and rsync changes to your remote server
-$ pacman -b -r user@example.com:/path/to/document/root/
-
-# Preview: serve the generated ./public directory locally
-$ pacman -b -s
+$ pacman -b -s user@example.com:/path/to/document/root/
 ```
 
 ## Templates

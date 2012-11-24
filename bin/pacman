@@ -2,25 +2,19 @@
 
 var program  = require("commander"),
     _        = require('underscore')._,
-    config   = require("../lib/config"),
-    core     = require("../lib/core"),
-    log      = require("../lib/log"),
-    fss      = require("../lib/fss"),
-    deploy   = require("../lib/deploy"),
-    server   = require("../lib/server");
+    pacman   = require("../lib/pacman");
 
 /*
  * Parse command line flags.
  */
 program
-  .version(config.version)
+  .version(pacman.version)
   .option("")
   .option("-d, --dev", "dev mode: serve content directly")
   .option("-p, --port <port>", "specify a different server port (default 3000)")
   .option("")
   .option("-b, --build", "build mode: build a complete version, with packed assets")
-  .option("-s, --server", "start a server from the target directory")
-  .option("-r, --rsync <target>", "rsync target dir to remote server or local dir")
+  .option("-s, --sync <target>", "sync target dir to remote server or local dir using rsync")
   .option("")
   .option("--config <path>", "change config file       (default ./config.js)")
   .option("--source <path>", "change source directory  (default ./content)")
@@ -30,54 +24,20 @@ program
 /*
  * If no options are given, show the help prompt.
  */
-if(!program.server && !program.dev && !program.build && !program.rsync) {
+if(!program.dev && !program.build && !program.sync) {
   program.help();
 }
 
 /*
- * Silent mode is for programmatic use of pacman.
+ * Override config with command line flags.
  */
-config.silent = false;
-
-/*
- * Overwrite the default config with custom command line configuration.
- */
-config.extend(_.pick(program, [
-  "dev", "port", "build", "server", "rsync", "config", "source", "target"
-]));
-
-/*
- * Start the system in dev mode.
- */
-var devmode = function() {
-  log("Source", fss.baseRelative(config.appdir));
-  server.dev();
-  log();
-};
-
-/*
- * Start the system in build mode.
- */
-var buildmode = function() {
-  log("Source", fss.baseRelative(config.appdir));
-  log("Target", fss.baseRelative(config.pubdir));
-  core.regenAll();
-  log();
-};
-
-/*
- * Deploy the target directory using rsync.
- */
-var rsync = function() {
-  log("rsync", "deploying target directory");
-  deploy.perform();
-};
+var config = pacman.config(_.extend(_.pick(program, [
+  "dev", "port", "build", "sync", "config", "source", "target"
+]), { silent: false }));
 
 /*
  * Decide what to do.
  */
-log();
-if(config.dev && !config.build) devmode();
-if(config.server && !config.dev) server.build();
-if(config.build) buildmode();
-if(!config.dev && !config.server && config.rsync) rsync();
+if(config.dev)   pacman.dev();
+if(config.build) pacman.build();
+if(config.sync)  pacman.deploy();

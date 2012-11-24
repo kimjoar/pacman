@@ -1,5 +1,5 @@
 var config = require("../../lib/config");
-var core   = require("../../lib/core");
+var pacman = require("../../lib/pacman");
 var fss    = require("../../lib/fss");
 var _      = require('underscore')._;
 
@@ -28,7 +28,7 @@ exports.setUp = function(callback) {
 };
 
 exports.canGenerateDevAssets = function(test) {
-  core.regenAll();
+  pacman.build();
   assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/css/1.css"));
   assertSubstr(test, fss.readFile("spec/out/assets/js.html"),  js("/js/1.js"));
   test.done();
@@ -37,7 +37,7 @@ exports.canGenerateDevAssets = function(test) {
 exports.canGenerateBuildAssets = function(test) {
   config.dev   = false;
   config.build = true;
-  core.regenAll();
+  pacman.build();
 
   assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/assets/group2.css"));
   assertSubstr(test, fss.readFile("spec/out/assets/js.html"),  js("/assets/group1.js"));
@@ -50,7 +50,7 @@ exports.canGenerateBuildAssets = function(test) {
 
 exports.canGenerateIgnoredAssets = function(test) {
   config.ignore_processing = ["templates/", "t2.html"];
-  core.regenAll();
+  pacman.build();
   test.equal(fss.readFile("spec/out/assets/templates/t1.html"), '<%= render("foo", "foo") %>');
   test.equal(fss.readFile("spec/out/assets/templates/t2.html"), '<%= render("bar", "bar") %>');
   test.done();
