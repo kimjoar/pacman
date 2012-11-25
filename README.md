@@ -102,6 +102,9 @@ $ pacman -b
 
 # Sync: rsync target directory to your remote server
 $ pacman -s --remote user@example.com:/path/to/document/root/
+
+# Build and sync to different local folder
+$ pacman -b -s --remote relative/target/folder
 ```
 
 
@@ -114,8 +117,8 @@ var pacman = require("pacman");
 
 // Set config flags
 pacman.config({
-  source: "/foo/bar",
-  target: "/baz/boo",
+  source: "relative/source/folder/name",
+  target: "relative/target/folder/name",
   remote: "foo@example.com:/path/to/document/root/"
 });
 
