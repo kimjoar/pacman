@@ -38,6 +38,6 @@ var config = pacman.config(_.extend(_.pick(program, [
 /*
  * Decide what to do.
  */
-if(config.dev)   pacman.dev();
 if(config.build) pacman.build();
 if(config.sync)  pacman.sync();
+if(config.dev)   pacman.dev();
