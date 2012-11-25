@@ -116,7 +116,7 @@ var pacman = require("pacman");
 pacman.config({
   source: "/foo/bar",
   target: "/baz/boo",
-  sync:   "foo@example.com:/path/to/document/root/"
+  remote: "foo@example.com:/path/to/document/root/"
 });
 
 // Start dev mode
