@@ -77,17 +77,18 @@ Usage: pacman [options]
 
 Options:
 
-  -h, --help           output usage information
-  -V, --version        output the version number
+  -h, --help       output usage information
+  -V, --version    output the version number
 
-  -d, --dev            serve content directly from source folder
-  -b, --build          build a complete version, with packed assets
-  -s, --sync <target>  sync target dir to remote server or local dir
+  -d, --dev        serve content directly from source folder
+  -b, --build      build a complete version, with packed assets
+  -s, --sync       sync target dir to remote server or local dir
 
-  --port   <port>      specify a different port (default 3000)
-  --config <path>      change config file       (default ./config.js)
-  --source <path>      change source directory  (default ./content)
-  --target <path>      change target directory  (default ./public)
+  --port   <port>  change dev server port    (default 3000)
+  --config <path>  change config file        (default ./config.js)
+  --source <path>  change source directory   (default ./content)
+  --target <path>  change target directory   (default ./public)
+  --remote <path>  set remote server address (no default)
 ```
 
 Here are some common use cases:
@@ -99,8 +100,8 @@ $ pacman -d
 # Build mode: process all files and assets into ./public
 $ pacman -b
 
-# Build and deploy: build site, and rsync changes to your remote server
-$ pacman -b -s user@example.com:/path/to/document/root/
+# Sync: rsync target directory to your remote server
+$ pacman -s --remote user@example.com:/path/to/document/root/
 ```
 
 You may also use pacman programmatically:
@@ -121,8 +122,8 @@ pacman.dev();
 // Start build mode
 pacman.build();
 
-// Deploy files
-pacman.deploy();
+// Sync target dir
+pacman.sync();
 ```
 
 

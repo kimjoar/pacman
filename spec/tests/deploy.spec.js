@@ -1,13 +1,14 @@
 var config = require("../../lib/config");
 var pacman = require("../../lib/pacman");
 var fss    = require("../../lib/fss");
-var deploy = require("../../lib/deploy");
+var sync   = require("../../lib/sync");
 
 exports.setUp = function(callback) {
   config.init({
+    sync:   true,
     appdir: "spec/cases/deploy/content",
     pubdir: "spec/out/deploy/public",
-    sync:   "spec/out/deploy/remote",
+    remote: "spec/out/deploy/remote",
     layout: false
   });
   callback();
@@ -15,7 +16,7 @@ exports.setUp = function(callback) {
 
 exports.canDeployOneFile = function(test) {
   pacman.build();
-  deploy.perform(function() {
+  sync.perform(function() {
     test.equal("1", fss.readFile("spec/out/deploy/remote/1.html"));
     test.done();
   });

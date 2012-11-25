@@ -10,14 +10,15 @@ var _        = require('underscore')._,
 program
   .version(pacman.version)
   .option("")
-  .option("-d, --dev",            "serve content directly from source folder")
-  .option("-b, --build",          "build a complete version, with packed assets")
-  .option("-s, --sync <target>",  "sync target dir to remote server or local dir")
+  .option("-d, --dev",   "serve content directly from source folder")
+  .option("-b, --build", "build a complete version, with packed assets")
+  .option("-s, --sync",  "sync target dir to remote server or local dir")
   .option("")
-  .option("--port   <port>", "specify a different port (default 3000)")
-  .option("--config <path>", "change config file       (default ./config.js)")
-  .option("--source <path>", "change source directory  (default ./content)")
-  .option("--target <path>", "change target directory  (default ./public)")
+  .option("--port   <port>", "change dev server port    (default 3000)")
+  .option("--config <path>", "change config file        (default ./config.js)")
+  .option("--source <path>", "change source directory   (default ./content)")
+  .option("--target <path>", "change target directory   (default ./public)")
+  .option("--remote <path>", "set remote server address (no default)")
   .parse(process.argv);
 
 /*
@@ -31,7 +32,7 @@ if(!program.dev && !program.build && !program.sync) {
  * Override config with command line flags.
  */
 var config = pacman.config(_.extend(_.pick(program, [
-  "dev", "port", "build", "sync", "config", "source", "target"
+  "dev", "build", "sync", "port", "config", "source", "target", "remote"
 ]), { silent: false }));
 
 /*
@@ -39,4 +40,4 @@ var config = pacman.config(_.extend(_.pick(program, [
  */
 if(config.dev)   pacman.dev();
 if(config.build) pacman.build();
-if(config.sync)  pacman.deploy();
+if(config.sync)  pacman.sync();
