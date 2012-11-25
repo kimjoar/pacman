@@ -104,6 +104,9 @@ $ pacman -b
 $ pacman -s --remote user@example.com:/path/to/document/root/
 ```
 
+
+## API
+
 You may also use pacman programmatically:
 
 ```js
