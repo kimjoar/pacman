@@ -10,7 +10,7 @@
   "bin": {
     "pacman": "./bin/pacman"
   },
-  "main": "./lib/pacman",
+  "main": "./lib/pacman.js",
   "dependencies": {
     "underscore": "",
     "commander": "",
