@@ -22,7 +22,7 @@ Pacman has **no support for**:
 * Pagination
 * Listing pages
 * Markdown
-* Other templating languages
+* Asset preprocessors
 
 Pacman **has support for**:
 
