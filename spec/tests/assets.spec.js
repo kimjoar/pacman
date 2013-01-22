@@ -1,3 +1,4 @@
+var fs     = require("fs");
 var config = require("../../lib/config");
 var pacman = require("../../lib/pacman");
 var fss    = require("../../lib/fss");
@@ -30,7 +31,7 @@ exports.setUp = function(callback) {
 exports.canGenerateDevAssets = function(test) {
   pacman.build();
   assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/css/1.css"));
-  assertSubstr(test, fss.readFile("spec/out/assets/js.html"),  js("/js/1.js"));
+  assertSubstr(test, fss.readFile("spec/out/assets/js1.html"),  js("/js/1.js"));
   test.done();
 };
 
@@ -39,10 +40,10 @@ exports.canGenerateBuildAssets = function(test) {
   config.build = true;
   pacman.build();
 
-  assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/assets/group2.css"));
-  assertSubstr(test, fss.readFile("spec/out/assets/js.html"),  js("/assets/group1.js"));
+  assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/assets/group3.css"));
+  assertSubstr(test, fss.readFile("spec/out/assets/js1.html"),  js("/assets/group1.js"));
 
-  test.equal(fss.readFile("spec/out/assets/assets/group2.css"), "*{z-index:1}");
+  test.equal(fss.readFile("spec/out/assets/assets/group3.css"), "*{z-index:1}");
   test.equal(fss.readFile("spec/out/assets/assets/group1.js"),  "var a=1;");
 
   test.done();
@@ -53,5 +54,14 @@ exports.canGenerateIgnoredAssets = function(test) {
   pacman.build();
   test.equal(fss.readFile("spec/out/assets/templates/t1.html"), '<%= render("foo", "foo") %>');
   test.equal(fss.readFile("spec/out/assets/templates/t2.html"), '<%= render("bar", "bar") %>');
+  test.done();
+};
+
+exports.canProcessEmptyAssetLists = function(test) {
+  config.dev   = false;
+  config.build = true;
+  pacman.build();
+
+  test.ok(!fs.existsSync("spec/out/assets/assets/group0.js"));
   test.done();
 };
