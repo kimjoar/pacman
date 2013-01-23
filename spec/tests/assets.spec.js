@@ -22,46 +22,60 @@ exports.setUp = function(callback) {
     pubdir: "spec/out/assets",
     config: "spec/cases/assets/assets1.js",
     layout: false,
-    dev:    true
+    ignore_processing: []
   });
   fss.resetDir(config.pubdir);
   callback();
 };
 
 exports.canGenerateDevAssets = function(test) {
-  pacman.build();
-  assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/css/1.css"));
-  assertSubstr(test, fss.readFile("spec/out/assets/js1.html"),  js("/js/1.js"));
-  test.done();
+  config.dev   = true;
+  config.build = false;
+  pacman.build(function() {
+    assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/css/1.css"));
+    assertSubstr(test, fss.readFile("spec/out/assets/js1.html"),  js("/js/1.js"));
+    test.done();
+  });
 };
 
 exports.canGenerateBuildAssets = function(test) {
   config.dev   = false;
   config.build = true;
-  pacman.build();
-
-  assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/assets/group3.css"));
-  assertSubstr(test, fss.readFile("spec/out/assets/js1.html"),  js("/assets/group1.js"));
-
-  test.equal(fss.readFile("spec/out/assets/assets/group3.css"), "*{z-index:1}");
-  test.equal(fss.readFile("spec/out/assets/assets/group1.js"),  "var a=1;");
-
-  test.done();
+  pacman.build(function() {
+    assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/assets/group3.css"));
+    assertSubstr(test, fss.readFile("spec/out/assets/js1.html"),  js("/assets/group1.js"));
+    test.equal(fss.readFile("spec/out/assets/assets/group3.css"), "*{z-index:1}");
+    test.equal(fss.readFile("spec/out/assets/assets/group1.js"),  "var a=1;");
+    test.done();
+  });
 };
 
 exports.canGenerateIgnoredAssets = function(test) {
+  config.dev   = false;
+  config.build = true;
   config.ignore_processing = ["templates/", "t2.html"];
-  pacman.build();
-  test.equal(fss.readFile("spec/out/assets/templates/t1.html"), '<%= render("foo", "foo") %>');
-  test.equal(fss.readFile("spec/out/assets/templates/t2.html"), '<%= render("bar", "bar") %>');
-  test.done();
+  pacman.build(function() {
+    test.equal(fss.readFile("spec/out/assets/templates/t1.html"), '<%= render("foo", "foo") %>');
+    test.equal(fss.readFile("spec/out/assets/templates/t2.html"), '<%= render("bar", "bar") %>');
+    test.done();
+  });
 };
 
 exports.canProcessEmptyAssetLists = function(test) {
   config.dev   = false;
   config.build = true;
-  pacman.build();
+  pacman.build(function() {
+    test.ok(!fs.existsSync("spec/out/assets/assets/group2.js"));
+    test.done();
+  });
+};
 
-  test.ok(!fs.existsSync("spec/out/assets/assets/group0.js"));
-  test.done();
+exports.canIgnoreDuplicateAssets = function(test) {
+  config.dev   = false;
+  config.build = true;
+  pacman.build(function() {
+    assertSubstr(test, fss.readFile("spec/out/assets/js3.html"), js("/assets/duplicates.js"));
+    test.equal(fss.readFile("spec/out/assets/assets/duplicates.js"), "var a=1;");
+    test.done();
+  });
 };
