@@ -33,7 +33,7 @@ exports.canGenerateDevAssets = function(test) {
   config.build = false;
   pacman.build(function() {
     assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/css/1.css"));
-    assertSubstr(test, fss.readFile("spec/out/assets/js1.html"),  js("/js/1.js"));
+    assertSubstr(test, fss.readFile("spec/out/assets/js_helper.html"),  js("/js_helper/1.js"));
     test.done();
   });
 };
@@ -42,10 +42,10 @@ exports.canGenerateBuildAssets = function(test) {
   config.dev   = false;
   config.build = true;
   pacman.build(function() {
-    assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/assets/group3.css"));
-    assertSubstr(test, fss.readFile("spec/out/assets/js1.html"),  js("/assets/group1.js"));
-    test.equal(fss.readFile("spec/out/assets/assets/group3.css"), "*{z-index:1}");
-    test.equal(fss.readFile("spec/out/assets/assets/group1.js"),  "var a=1;");
+    assertSubstr(test, fss.readFile("spec/out/assets/css.html"), css("/assets/all.css"));
+    assertSubstr(test, fss.readFile("spec/out/assets/js_helper.html"),  js("/assets/helper.js"));
+    test.equal(fss.readFile("spec/out/assets/assets/all.css"), "*{z-index:1}");
+    test.equal(fss.readFile("spec/out/assets/assets/helper.js"),  "var a=1;");
     test.done();
   });
 };
@@ -65,7 +65,7 @@ exports.canProcessEmptyAssetLists = function(test) {
   config.dev   = false;
   config.build = true;
   pacman.build(function() {
-    test.ok(!fs.existsSync("spec/out/assets/assets/group2.js"));
+    test.ok(!fs.existsSync("spec/out/assets/assets/js_empty.js"));
     test.done();
   });
 };
@@ -74,8 +74,18 @@ exports.canIgnoreDuplicateAssets = function(test) {
   config.dev   = false;
   config.build = true;
   pacman.build(function() {
-    assertSubstr(test, fss.readFile("spec/out/assets/js3.html"), js("/assets/duplicates.js"));
+    assertSubstr(test, fss.readFile("spec/out/assets/js_duplicates.html"), js("/assets/duplicates.js"));
     test.equal(fss.readFile("spec/out/assets/assets/duplicates.js"), "var a=1;");
+    test.done();
+  });
+};
+
+exports.canIgnoreFilesWithWrongExtension = function(test) {
+  config.dev   = false;
+  config.build = true;
+  pacman.build(function() {
+    assertSubstr(test, fss.readFile("spec/out/assets/js_filetype.html"), js("/assets/filetype.js"));
+    test.equal(fss.readFile("spec/out/assets/assets/filetype.js"), "function f(){}");
     test.done();
   });
 };

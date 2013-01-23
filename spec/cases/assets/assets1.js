@@ -5,14 +5,16 @@ exports.config = {
   assets: {
 
     js: {
-        group1: [ "/js/1.js" ],
-        group2: "/js2",
-        duplicates: [ "/js/1.js", "/js" ]
+        helper: [ "/js_helper/1.js" ],
+        empty: "/js_empty",
+        duplicates: [ "/js_helper/1.js", "/js_helper" ],
+        filetype: "/js_filetype"
     },
 
     css: {
-        group3: [ "/css" ]
+        all: [ "/css" ]
     }
+
   }
 
 };
