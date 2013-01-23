@@ -150,10 +150,10 @@ individually generated page.
 ## Partials
 
 Partials are small bits of HTML that you need on more than one page. Render another HTML file
-(most often from your `_partials` directory) by using the `render` helper:
+(most often from your `_partials` directory) by using the `partial` helper:
 
 ```
-<%= render("partial", "_partials/myFile.html") %>
+<%= partial("_partials/myFile.html") %>
 ```
 
 Putting your partials in a folder starting with `_` ensures that they will not be copied
