@@ -2,7 +2,7 @@ var fs     = require("fs");
 var config = require("../../lib/config");
 var pacman = require("../../lib/pacman");
 var fss    = require("../../lib/fss");
-var _      = require('underscore')._;
+var _      = require("underscore")._;
 
 var css = function(path) {
   return "<link rel='stylesheet' href='" + path;

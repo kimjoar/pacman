@@ -1,7 +1,7 @@
 var config = require("../../lib/config");
 var pacman = require("../../lib/pacman");
 var fss    = require("../../lib/fss");
-var _      = require('underscore')._;
+var _      = require("underscore")._;
 
 exports.setUp = function(callback) {
   fss.resetDir(config.pubdir);

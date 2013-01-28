@@ -1,6 +1,6 @@
 var config = require("../../lib/config");
 var fss    = require("../../lib/fss");
-var _      = require('underscore')._;
+var _      = require("underscore")._;
 
 exports.isDefined = function(test) {
   test.ok(_.isObject(fss));
