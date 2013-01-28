@@ -20,6 +20,7 @@ exports.setUp = function(callback) {
   config.init({
     appdir: "spec/cases/assets",
     pubdir: "spec/out/assets",
+    packed: "assets",
     config: "spec/cases/assets/assets1.js",
     layout: false,
     ignore_processing: []
