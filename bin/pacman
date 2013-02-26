@@ -19,6 +19,7 @@ program
   .option("--source <path>", "change source directory   (default ./content)")
   .option("--target <path>", "change target directory   (default ./public)")
   .option("--remote <path>", "set remote server address (no default)")
+  .option("--silent",        "suppress cli output       (default false)")
   .parse(process.argv);
 
 /*
@@ -31,9 +32,9 @@ if(!program.dev && !program.build && !program.sync) {
 /*
  * Override config with command line flags.
  */
-var config = pacman.config(_.extend(_.pick(program, [
-  "dev", "build", "sync", "port", "config", "source", "target", "remote"
-]), { silent: false }));
+var config = pacman.config(_.extend({ silent: false }, _.pick(program, [
+  "dev", "build", "sync", "port", "config", "source", "target", "remote", "silent"
+])));
 
 /*
  * Decide what to do.
