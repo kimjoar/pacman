@@ -20,7 +20,7 @@ exports.canCopyZipFiles = function(test) {
   config.init({
     appdir: "spec/cases/filetypes",
     pubdir: "spec/out/filetypes",
-    config: false,
+    config: "",
     layout: false,
     build: true,
     dev: false
